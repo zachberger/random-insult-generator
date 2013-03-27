@@ -1,5 +1,6 @@
 package edu.rit.se.agile.randominsultapp;
 
+import edu.rit.se.agile.data.TempleteDAO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -12,6 +13,7 @@ public class RandomInsults extends Activity {
 
 	private Button generateButton;
 	private TextView insultTextField;
+	private TempleteDAO templeteDAO;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,7 @@ public class RandomInsults extends Activity {
 		
 		insultTextField = (TextView) findViewById( R.id.insult_display );
 		generateButton = (Button) findViewById(R.id.button_generate);
+		templeteDAO = new TempleteDAO(this);
 
 		generateButton.setOnClickListener( new OnClickListener() {
 			
