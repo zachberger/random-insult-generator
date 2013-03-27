@@ -3,5 +3,6 @@
     <string name="app_name">Random Insult App</string>
     <string name="hello_world">Hello World</string>
     <string name="action_settings">Settings</string>
+    <string name="button_generate">Generate</string>
 
 </resources>
