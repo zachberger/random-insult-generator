@@ -10,11 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import edu.rit.se.agile.data.Template;
 import edu.rit.se.agile.data.TemplateDAO;
 import edu.rit.se.agile.data.WordDAO;
+import edu.rit.se.agile.data.WordsTemplate;
 
 public class RandomInsults extends Activity {
 
@@ -42,7 +44,13 @@ public class RandomInsults extends Activity {
 
 		// TODO: Add a cursor adapter from DAO once categories are implemented
 		//TODO: zach look at dis
-		//categorySpinner.setAdapter(new SimpleCursorAdapter(getApplicationContext(), 0, wordDAO.getCategories(), null, null));
+		categorySpinner.setAdapter(
+				new SimpleCursorAdapter(this, 
+						R.id.category_list, 
+						wordDAO.getCategories(), 
+						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
+						new int[]{ R.id.category_list }, 
+						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
 		
 		generateButton.setOnClickListener( new OnClickListener() {
 			
