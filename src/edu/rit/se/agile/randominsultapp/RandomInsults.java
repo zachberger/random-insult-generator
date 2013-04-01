@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.rit.se.agile.data.Template;
 import edu.rit.se.agile.data.TemplateDAO;
+import edu.rit.se.agile.data.WordDAO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -17,6 +18,7 @@ public class RandomInsults extends Activity {
 	private Button generateButton;
 	private TextView insultTextField;
 	private TemplateDAO templateDAO;
+	private WordDAO wordDAO;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,10 @@ public class RandomInsults extends Activity {
 		insultTextField = (TextView) findViewById( R.id.insult_display );
 		generateButton = (Button) findViewById(R.id.button_generate);
 		templateDAO = new TemplateDAO(this);
+		wordDAO  = new WordDAO(this);
 
 		templateDAO.open();
+		wordDAO.open();
 		
 		generateButton.setOnClickListener( new OnClickListener() {
 			
