@@ -14,7 +14,9 @@ public class WordDAO {
 	private WordsTemplate dbHelper;
 	private String[] allColumns = { WordsTemplate.COLUMN_ID,
 			WordsTemplate.COLUMN_WORD_TYPE, 
+			WordsTemplate.COLUMN_CATEGORY,
 			WordsTemplate.COLUMN_WORD};
+	private String[] category = {WordsTemplate.COLUMN_CATEGORY};
 	
 	public WordDAO(Context context) {
 		dbHelper = new WordsTemplate(context);
@@ -28,10 +30,11 @@ public class WordDAO {
 		database.close();
 	}
 	
-	public Word createWord(String type, String value) {
+	public Word createWord(String type, String value, String category) {
 		ContentValues values = new ContentValues();
 		values.put(dbHelper.COLUMN_WORD, value);
 		values.put(dbHelper.COLUMN_WORD_TYPE, type);
+		values.put(dbHelper.COLUMN_CATEGORY, category);
 		long insertId = database.insert(dbHelper.TABLE_NAME, null,
 				values);
 		Cursor cursor = database.query(dbHelper.TABLE_NAME,
@@ -54,7 +57,8 @@ public class WordDAO {
 		Word comment = new Word();
 		comment.setId(cursor.getLong(0));
 		comment.setType(cursor.getString(1));
-		comment.setWord(cursor.getString(2));
+		comment.setCategory(cursor.getString(2));
+		comment.setWord(cursor.getString(3));
 		return comment;
 	}
 
@@ -73,6 +77,10 @@ public class WordDAO {
 		// Make sure to close the cursor
 		cursor.close();
 		return comments;
+	}
+	
+	public Cursor getCategories() {
+		return database.query(dbHelper.TABLE_NAME, category, null, null, null, null, null);
 	}
 
 }

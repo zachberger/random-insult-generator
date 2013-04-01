@@ -13,6 +13,7 @@ public class TemplateDAO {
 	private SQLiteDatabase database;
 	private DatabaseTemplate dbHelper;
 	private String[] allColumns = { DatabaseTemplate.COLUMN_ID,
+			DatabaseTemplate.COLUMN_CATEGORY,
 			DatabaseTemplate.COLUMN_TEMPLATE };
 
 
@@ -53,6 +54,7 @@ public class TemplateDAO {
 	private Template cursorToTemplate(Cursor cursor) {
 		Template comment = new Template();
 		comment.setId(cursor.getLong(0));
+		comment.setCategory(cursor.getString(1));
 		comment.setTemplate(cursor.getString(1));
 		return comment;
 	}

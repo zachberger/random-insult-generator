@@ -7,10 +7,15 @@ import edu.rit.se.agile.data.TemplateDAO;
 import edu.rit.se.agile.data.WordDAO;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
+import android.support.v4.widget.CursorAdapter;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -39,7 +44,8 @@ public class RandomInsults extends Activity {
 		
 
 		// TODO: Add a cursor adapter from DAO once categories are implemented
-		//categorySpinner.setAdapter( );
+		//TODO: zach look at dis
+		//categorySpinner.setAdapter(new SimpleCursorAdapter(getApplicationContext(), 0, wordDAO.getCategories(), null, null));
 		
 		generateButton.setOnClickListener( new OnClickListener() {
 			

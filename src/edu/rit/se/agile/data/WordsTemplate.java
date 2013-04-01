@@ -10,6 +10,7 @@ public class WordsTemplate extends SQLiteOpenHelper {
 	public static final String COLUMN_ID = "id";
 	public static final String COLUMN_WORD_TYPE = "word_type";
 	public static final String COLUMN_WORD = "word";
+	public static final String COLUMN_CATEGORY = "category";
 	
 	private static final String DATABASE_NAME = "words.db";
 	private static final int DATABASE_VERSION = 1;
@@ -18,6 +19,7 @@ public class WordsTemplate extends SQLiteOpenHelper {
 		private static final String DATABASE_CREATE = "create table "
 		      + TABLE_NAME + "(" + COLUMN_ID + " integer primary key autoincrement, " 
 		      + COLUMN_WORD_TYPE + " text not null, "
+		      + COLUMN_CATEGORY + " text not null, "
 		      + COLUMN_WORD + " text not null);";
 	
 	public WordsTemplate(Context context) {

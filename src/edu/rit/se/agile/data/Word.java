@@ -4,6 +4,7 @@ public class Word {
 	private long id;
 	private String type;
 	private String word;
+	private String category;
 
 	public long getId() {
 		return id;
@@ -30,5 +31,13 @@ public class Word {
 
 	public void setWord(String word) {
 		this.word = word;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

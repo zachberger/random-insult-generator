@@ -4,6 +4,7 @@ public class Template {
 	
 	private long id;
 	private String template;
+	private String category;
 	
 	public long getId() {
 		return id;
@@ -16,6 +17,12 @@ public class Template {
 	}
 	public void setTemplate(String template) {
 		this.template = template;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	
