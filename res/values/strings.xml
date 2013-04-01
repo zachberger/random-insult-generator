@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Random Insult App</string>
@@ -5,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="button_generate">Generate</string>
     <string name="default_insult">Touch generate for a new insult</string>
+    <string name="title_activity_add_word">AddWord</string>
+    <string name="action_add_word">Add Word</string>
 
 </resources>
