@@ -2,12 +2,9 @@ package edu.rit.se.agile.randominsultapp;
 
 import java.util.List;
 
-import edu.rit.se.agile.data.Template;
-import edu.rit.se.agile.data.TemplateDAO;
-import edu.rit.se.agile.data.WordDAO;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +12,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import edu.rit.se.agile.data.Template;
+import edu.rit.se.agile.data.TemplateDAO;
+import edu.rit.se.agile.data.WordDAO;
 
 public class RandomInsults extends Activity {
 
@@ -70,7 +70,12 @@ public class RandomInsults extends Activity {
 		case R.id.view_favorites:
 			Intent intent = new Intent(this, ViewFavorites.class);
 		    startActivity(intent);
+			break;
+		case R.id.action_add_word:
+			Intent i = new Intent(this, AddWord.class);
+			startActivity(i);
 	    }
+		
 		return true;
 	}
 
