@@ -1,5 +1,8 @@
 package edu.rit.se.agile.randominsultapp;
 
+import java.util.List;
+
+import edu.rit.se.agile.data.Templete;
 import edu.rit.se.agile.data.TempleteDAO;
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,11 +27,17 @@ public class RandomInsults extends Activity {
 		generateButton = (Button) findViewById(R.id.button_generate);
 		templeteDAO = new TempleteDAO(this);
 
+		templeteDAO.open();
+		
 		generateButton.setOnClickListener( new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				List<Templete> temp = templeteDAO.getAllTemplates();
 				insultTextField.setText("Some insult.");
+				if(temp.size() > 0 ) {
+					insultTextField.setText(temp.get(0).getTemplete());
+				}
 			}
 			
 		});

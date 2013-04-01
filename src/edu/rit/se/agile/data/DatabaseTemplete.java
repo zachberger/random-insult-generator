@@ -15,7 +15,7 @@ public class DatabaseTemplete extends SQLiteOpenHelper {
 	
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
-	      + "(" + COLUMN_ID
+	      + TABLE_NAME + "(" + COLUMN_ID
 	      + " integer primary key autoincrement, " + COLUMN_TEMPLETE
 	      + " text not null);";
 

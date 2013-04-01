@@ -57,7 +57,7 @@ public class TempleteDAO {
 		return comment;
 	}
 
-	public List<Templete> getAllComments() {
+	public List<Templete> getAllTemplates() {
 		List<Templete> comments = new ArrayList<Templete>();
 
 		Cursor cursor = database.query(dbHelper.TABLE_NAME,
