@@ -53,7 +53,7 @@ public class TemplateDAO {
 	private Template cursorToTemplate(Cursor cursor) {
 		Template comment = new Template();
 		comment.setId(cursor.getLong(0));
-		comment.setTemplete(cursor.getString(1));
+		comment.setTemplate(cursor.getString(1));
 		return comment;
 	}
 

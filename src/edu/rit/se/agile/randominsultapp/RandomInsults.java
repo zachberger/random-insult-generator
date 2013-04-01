@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class RandomInsults extends Activity {
@@ -19,6 +20,7 @@ public class RandomInsults extends Activity {
 	private TextView insultTextField;
 	private TemplateDAO templateDAO;
 	private WordDAO wordDAO;
+	private Spinner categorySpinner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,17 @@ public class RandomInsults extends Activity {
 		
 		insultTextField = (TextView) findViewById( R.id.insult_display );
 		generateButton = (Button) findViewById(R.id.button_generate);
+		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
+
 		templateDAO = new TemplateDAO(this);
 		wordDAO  = new WordDAO(this);
 
 		templateDAO.open();
 		wordDAO.open();
+		
+
+		// TODO: Add a cursor adapter from DAO once categories are implemented
+		//categorySpinner.setAdapter( );
 		
 		generateButton.setOnClickListener( new OnClickListener() {
 			
@@ -40,7 +48,7 @@ public class RandomInsults extends Activity {
 				List<Template> temp = templateDAO.getAllTemplates();
 				insultTextField.setText("Some insult.");
 				if(temp.size() > 0 ) {
-					insultTextField.setText(temp.get(0).getTemplete());
+					insultTextField.setText(temp.get(0).getTemplate());
 				}
 			}
 			
