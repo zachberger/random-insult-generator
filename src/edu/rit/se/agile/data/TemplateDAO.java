@@ -9,15 +9,15 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public class TempleteDAO {
+public class TemplateDAO {
 	private SQLiteDatabase database;
-	private DatabaseTemplete dbHelper;
-	private String[] allColumns = { DatabaseTemplete.COLUMN_ID,
-			DatabaseTemplete.COLUMN_TEMPLETE };
+	private DatabaseTemplate dbHelper;
+	private String[] allColumns = { DatabaseTemplate.COLUMN_ID,
+			DatabaseTemplate.COLUMN_TEMPLATE };
 
 
-	public TempleteDAO(Context context) {
-		dbHelper = new DatabaseTemplete(context);
+	public TemplateDAO(Context context) {
+		dbHelper = new DatabaseTemplate(context);
 	}
 
 	public void open() throws SQLException {
@@ -29,43 +29,43 @@ public class TempleteDAO {
 	}
 
 
-	public Templete createTempelete(String value) {
+	public Template createTemplate(String value) {
 		ContentValues values = new ContentValues();
-		values.put(dbHelper.COLUMN_TEMPLETE, value);
+		values.put(dbHelper.COLUMN_TEMPLATE, value);
 		long insertId = database.insert(dbHelper.TABLE_NAME, null,
 				values);
 		Cursor cursor = database.query(dbHelper.TABLE_NAME,
 				allColumns, dbHelper.COLUMN_ID + " = " + insertId, null,
 				null, null, null);
 		cursor.moveToFirst();
-		Templete newTemplete = cursorToComment(cursor);
+		Template newTemplete = cursorToTemplate(cursor);
 		cursor.close();
 		return newTemplete;
 	}
 
-	public void deleteComment(Templete templete) {
-		long id = templete.getId();
+	public void deleteTemplate(Template template) {
+		long id = template.getId();
 		System.out.println("Comment deleted with id: " + id);
 		database.delete(dbHelper.TABLE_NAME, dbHelper.COLUMN_ID
 				+ " = " + id, null);
 	}
 
-	private Templete cursorToComment(Cursor cursor) {
-		Templete comment = new Templete();
+	private Template cursorToTemplate(Cursor cursor) {
+		Template comment = new Template();
 		comment.setId(cursor.getLong(0));
 		comment.setTemplete(cursor.getString(1));
 		return comment;
 	}
 
-	public List<Templete> getAllTemplates() {
-		List<Templete> comments = new ArrayList<Templete>();
+	public List<Template> getAllTemplates() {
+		List<Template> comments = new ArrayList<Template>();
 
 		Cursor cursor = database.query(dbHelper.TABLE_NAME,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Templete comment = cursorToComment(cursor);
+			Template comment = cursorToTemplate(cursor);
 			comments.add(comment);
 			cursor.moveToNext();
 		}

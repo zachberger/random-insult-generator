@@ -1,9 +1,9 @@
 package edu.rit.se.agile.data;
 
-public class Templete {
+public class Template {
 	
 	private long id;
-	private String templete;
+	private String template;
 	
 	public long getId() {
 		return id;
@@ -12,10 +12,10 @@ public class Templete {
 		this.id = id;
 	}
 	public String getTemplete() {
-		return templete;
+		return template;
 	}
 	public void setTemplete(String templete) {
-		this.templete = templete;
+		this.template = templete;
 	}
 	
 	
