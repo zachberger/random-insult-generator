@@ -1,17 +1,15 @@
 package edu.rit.se.agile.randominsultapp;
 
+import java.util.List;
+
+import edu.rit.se.agile.data.Templete;
 import edu.rit.se.agile.data.TempleteDAO;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
-import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewDebug.FlagToString;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,16 +30,20 @@ public class RandomInsults extends Activity {
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
 		
 		templeteDAO = new TempleteDAO(this);
+		templeteDAO.open();
 
 		// TODO: Add a cursor adapter from DAO once categories are implemented
 		//categorySpinner.setAdapter( );
-		
-		
+
 		generateButton.setOnClickListener( new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				List<Templete> temp = templeteDAO.getAllTemplates();
 				insultTextField.setText("Some insult.");
+				if(temp.size() > 0 ) {
+					insultTextField.setText(temp.get(0).getTemplete());
+				}
 			}
 			
 		});
