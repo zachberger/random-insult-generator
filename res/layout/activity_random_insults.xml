@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RandomInsults" >
-
+    
     <Button
         android:id="@+id/button_generate"
         android:layout_width="wrap_content"
@@ -23,8 +23,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
+        android:text="@string/insult_category_label" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/insult_display"
+        android:layout_below="@+id/insult_display"
+        android:layout_marginTop="78dp"
         android:text="@string/default_insult" />
+
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/insult_display"
+        android:layout_below="@+id/insult_display" />
 
 </RelativeLayout>

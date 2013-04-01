@@ -8,5 +8,6 @@
     <string name="default_insult">Touch generate for a new insult</string>
     <string name="title_activity_add_word">AddWord</string>
     <string name="action_add_word">Add Word</string>
+    <string name="insult_category_label">Category</string>
 
 </resources>
