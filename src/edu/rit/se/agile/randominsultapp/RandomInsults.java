@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.rit.se.agile.data.Template;
 import edu.rit.se.agile.data.TemplateDAO;
+import edu.rit.se.agile.data.WordDAO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -18,8 +19,9 @@ public class RandomInsults extends Activity {
 
 	private Button generateButton;
 	private TextView insultTextField;
-	private Spinner categorySpinner;
 	private TemplateDAO templateDAO;
+	private WordDAO wordDAO;
+	private Spinner categorySpinner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,15 @@ public class RandomInsults extends Activity {
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
 
 		templateDAO = new TemplateDAO(this);
+		wordDAO  = new WordDAO(this);
+
 		templateDAO.open();
+		wordDAO.open();
+		
 
 		// TODO: Add a cursor adapter from DAO once categories are implemented
 		//categorySpinner.setAdapter( );
-
+		
 		generateButton.setOnClickListener( new OnClickListener() {
 			
 			@Override
