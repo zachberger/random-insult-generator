@@ -2,12 +2,11 @@ package edu.rit.se.agile.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseTemplate extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "template";
-	public static final String COLUMN_ID = "id";
+	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_TEMPLATE = "template";
 	public static final String COLUMN_CATEGORY = "category";
 	

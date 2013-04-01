@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class WordsTemplate extends SQLiteOpenHelper {
 	
 	public static final String TABLE_NAME = "words";
-	public static final String COLUMN_ID = "id";
+	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_WORD_TYPE = "word_type";
 	public static final String COLUMN_WORD = "word";
 	public static final String COLUMN_CATEGORY = "category";
