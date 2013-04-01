@@ -4,5 +4,6 @@
     <string name="hello_world">Hello World</string>
     <string name="action_settings">Settings</string>
     <string name="button_generate">Generate</string>
+    <string name="default_insult">Touch generate for a new insult</string>
 
 </resources>
