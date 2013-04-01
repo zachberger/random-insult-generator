@@ -42,7 +42,7 @@ public class RandomInsults extends Activity {
 				List<Template> temp = templateDAO.getAllTemplates();
 				insultTextField.setText("Some insult.");
 				if(temp.size() > 0 ) {
-					insultTextField.setText(temp.get(0).getTemplete());
+					insultTextField.setText(temp.get(0).getTemplate());
 				}
 			}
 			
