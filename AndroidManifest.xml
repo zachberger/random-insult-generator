@@ -27,6 +27,13 @@
             android:name="edu.rit.se.agile.randominsultapp.AddWord"
             android:label="@string/title_activity_add_word" >
         </activity>
+                <activity
+            android:name="edu.rit.se.agile.randominsultapp.ViewFavorites"
+            android:label="@string/title_activity_view_favorites"
+            android:parentActivityName="edu.rit.se.agile.randominsultapp.RandomInsults" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.rit.se.agile.randominsultapp.RandomInsults" />
+        </activity>
     </application>
-
 </manifest>

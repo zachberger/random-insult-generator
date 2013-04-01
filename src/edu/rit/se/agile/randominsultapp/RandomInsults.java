@@ -7,6 +7,7 @@ import edu.rit.se.agile.data.TemplateDAO;
 import edu.rit.se.agile.data.WordDAO;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,7 +67,9 @@ public class RandomInsults extends Activity {
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item){
 		switch (item.getItemId()) {
-
+		case R.id.view_favorites:
+			Intent intent = new Intent(this, ViewFavorites.class);
+		    startActivity(intent);
 	    }
 		return true;
 	}
