@@ -18,7 +18,7 @@
         android:text="@string/button_generate" />
 
     <TextView
-        android:id="@+id/insult_display"
+        android:id="@+id/insult_category_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -27,20 +27,19 @@
         android:layout_marginTop="20dp"
         android:text="@string/insult_category_label" />
 
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/insult_display"
-        android:layout_below="@+id/insult_display"
-        android:layout_marginTop="78dp"
-        android:text="@string/default_insult" />
-
     <Spinner
         android:id="@+id/category_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/insult_display"
-        android:layout_below="@+id/insult_display" />
+        android:layout_alignLeft="@+id/insult_category_label"
+        android:layout_below="@+id/insult_category_label" />
+
+    <TextView
+        android:id="@+id/insult_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/category_spinner"
+        android:layout_below="@+id/category_spinner"
+        android:text="@string/default_insult" />
 
 </RelativeLayout>
