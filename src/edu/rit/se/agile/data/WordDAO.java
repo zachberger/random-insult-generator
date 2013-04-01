@@ -16,7 +16,7 @@ public class WordDAO {
 			WordsTemplate.COLUMN_WORD_TYPE, 
 			WordsTemplate.COLUMN_CATEGORY,
 			WordsTemplate.COLUMN_WORD};
-	private String[] category = {WordsTemplate.COLUMN_CATEGORY};
+	private String[] category = {WordsTemplate.COLUMN_ID, WordsTemplate.COLUMN_CATEGORY};
 	
 	public WordDAO(Context context) {
 		dbHelper = new WordsTemplate(context);
