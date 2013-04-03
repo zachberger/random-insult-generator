@@ -9,4 +9,10 @@
     <string name="action_add_word">Add Word</string>
     <string name="insult_category_label">Category</string>
     <string name="title_activity_view_favorites">Favorite Insults</string>
+    <string-array name="add_word_spinner_array">
+        <item>Noun</item>
+        <item>Adjective</item>
+        <item>Verb</item>
+        <item>Adverb</item>
+    </string-array>
 </resources>
