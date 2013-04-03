@@ -9,4 +9,5 @@
     <string name="action_add_word">Add Word</string>
     <string name="insult_category_label">Category</string>
     <string name="title_activity_view_favorites">Favorite Insults</string>
+    <string name="button_save_favorite">Save to Favorites</string>
 </resources>
