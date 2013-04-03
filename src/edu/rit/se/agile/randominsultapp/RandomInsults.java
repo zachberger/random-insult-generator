@@ -87,5 +87,25 @@ public class RandomInsults extends Activity {
 		
 		return true;
 	}
-
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		wordDAO.close();
+		templateDAO.close();
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		wordDAO.close();
+		templateDAO.close();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		wordDAO.open();
+		templateDAO.open();
+	}
 }
