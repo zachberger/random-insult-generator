@@ -1,5 +1,5 @@
 /**
- * 
+ * Central location to declare what the placeholders for templates are.
  */
 package edu.rit.se.agile.data;
 
