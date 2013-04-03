@@ -15,4 +15,5 @@
         <item>Verb</item>
         <item>Adverb</item>
     </string-array>
+    <string name="button_save_favorite">Save to Favorites</string>
 </resources>
