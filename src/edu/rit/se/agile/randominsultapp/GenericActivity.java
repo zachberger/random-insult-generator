@@ -20,16 +20,20 @@ public class GenericActivity extends Activity {
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		Intent i = null;
 		switch (item.getItemId()) {
-		case R.id.view_favorites:
-			Intent intent = new Intent(this, ViewFavorites.class);
-		    startActivity(intent);
+		case R.id.menu_view_favorites:
+			i = new Intent(this, ViewFavorites.class);
 			break;
-		case R.id.action_add_word:
-			Intent i = new Intent(this, AddWord.class);
-			startActivity(i);
+		case R.id.menu_add_word:
+			i = new Intent(this, AddWord.class);
+			break;
+		case R.id.menu_generate_insults:
+			i = new Intent(this, RandomInsults.class);
+			break;
 	    }
-		
+		i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+		startActivity(i);
 		return true;
 	}
 

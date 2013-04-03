@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/action_add_word" android:orderInCategory="100" android:title="@string/action_add_word" android:showAsAction="never"></item>
-    <item android:id="@+id/view_favorites" android:title="View Favorites"></item>
+    <item android:id="@+id/menu_generate_insults" android:title="Generate Insults"></item><item android:id="@+id/menu_view_favorites" android:title="View Favorites"></item><item android:id="@+id/menu_add_word" android:orderInCategory="100" android:title="@string/action_add_word" android:showAsAction="never"></item>
+    
+    
 </menu>
