@@ -19,6 +19,23 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 	      + " integer primary key autoincrement, " 
 	      + COLUMN_CATEGORY + " text not null, " 
 	      + COLUMN_TEMPLATE + " text not null);";
+	
+	//The seperator string for the csv file to seperate entries.
+		private static final String SEPERATOR = ",";
+		
+		/*
+		 * The filename for the template csv file.
+		 * 
+		 * Format of the file needs to one entry per line. each entry is as follows
+		 * 
+		 * id , category , template
+		 * 
+		 * 
+		 * NOTE: The templates cannot have ',' in them, if they do we need to change our seperator.
+		 * 
+		 * 
+		 */
+		private static final String IMPORT_FILE_NAME = "template.csv";	
 
 	public DatabaseTemplate(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
