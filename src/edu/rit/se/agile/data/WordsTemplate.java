@@ -21,10 +21,10 @@ public class WordsTemplate extends SQLiteOpenHelper {
 			+ COLUMN_WORD_TYPE + " text not null, "
 			+ COLUMN_CATEGORY + " text not null, "
 			+ COLUMN_WORD + " text not null);";
-	
+
 	//The seperator string for the csv file to seperate entries.
 	private static final String SEPERATOR = ",";
-	
+
 	/*
 	 * The filename for the words csv file.
 	 * 
