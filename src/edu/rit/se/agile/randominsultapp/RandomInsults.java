@@ -37,9 +37,6 @@ public class RandomInsults extends GenericActivity {
 		templateDAO.open();
 		wordDAO.open();
 		
-
-		// TODO: Add a cursor adapter from DAO once categories are implemented
-		//TODO: zach look at dis
 		categorySpinner.setAdapter(
 				new SimpleCursorAdapter(this, 
 						R.id.category_list, 
