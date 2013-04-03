@@ -1,5 +1,30 @@
-1, Adjective, vulgar, fucking
-2, Adverb, vulgar, fucking
-3, Verb, vulgar, fuck
-4, Noun, vulgar, fucker
-5, Noun, vulgar, clusterfuck
+1,Adjective,vulgar,fucking
+2,Adverb,vulgar,fucking
+3,Verb,vulgar,fuck
+4,Noun,vulgar,fucker
+5,Noun,vulgar,clusterfuck
+6,Noun,vulgar,shit
+7,Adjective,vulgar,shitty
+8,Verb,vulgar,shit
+9,Adverb,vulgar,shittily
+10,Noun,vulgar,bitch
+11,Adjective,vulgar,bitchin
+12,Adjective,vulgar,bitchy
+13,Verb,vulgar,bitch
+14,Adverb,vulgar,bitchily
+15,Noun,vulgar,piss
+16,Verb,vulgar,piss
+17,Adjective,vulgar,pissed
+18,Noun,vulgar,ass
+19,Noun,vulgar,asshole
+20,Noun,vulgar,asspirate
+21,Noun,vulgar,cock
+22,Verb,none,eat
+23,Verb,none,open
+24,Verb,none,go
+25,Verb,none,die
+26,Verb,none,choke
+27,Noun,none,Mother
+28,Noun,none,Father
+29,Noun,none,Sister
+30,Noun,none,Brother
