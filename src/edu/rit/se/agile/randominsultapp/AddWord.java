@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 import edu.rit.se.agile.data.Word;
 import edu.rit.se.agile.data.WordType;
 
@@ -41,7 +42,9 @@ public class AddWord extends GenericActivity {
 				}
 				
 				Word newWord = RandomInsults.wordDAO.createWord(spinnerText, text, "default");
-				System.out.println(newWord.getWord() + " is type " + newWord.getType());
+				Toast.makeText(v.getContext(), 
+						newWord.getWord() + " is type " + newWord.getType(), 
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
