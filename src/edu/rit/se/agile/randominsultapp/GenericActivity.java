@@ -36,5 +36,25 @@ public class GenericActivity extends Activity {
 		startActivity(i);
 		return true;
 	}
-
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		RandomInsults.wordDAO.close();
+		RandomInsults.templateDAO.close();
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		RandomInsults.wordDAO.close();
+		RandomInsults.templateDAO.close();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		RandomInsults.wordDAO.open();
+		RandomInsults.templateDAO.open();
+	}
 }

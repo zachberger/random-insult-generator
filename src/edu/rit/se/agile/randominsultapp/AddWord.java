@@ -6,7 +6,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+import edu.rit.se.agile.data.Word;
+import edu.rit.se.agile.data.WordType;
 
 public class AddWord extends GenericActivity {
 	private Button addWordButton;
@@ -26,10 +27,22 @@ public class AddWord extends GenericActivity {
 			@Override
 			public void onClick(View v) {
 				String text = textField.getText().toString();
-				String spinnerText = spinner.getSelectedItem().toString();
-				Toast.makeText(v.getContext(), spinnerText + ": " + text, Toast.LENGTH_SHORT).show();
+				String spinnerText = spinner.getSelectedItem().toString().toLowerCase();
+				String wordType;
+				
+				if (spinnerText.equals("noun")) {
+					wordType = WordType.NOUN.toString();
+				} else if (spinnerText.equals("verb")) {
+					wordType = WordType.VERB.toString();
+				} else if (spinnerText.equals("adjective")) {
+					wordType = WordType.ADJECTIVE.toString();
+				} else if (spinnerText.equals("adverb")) {
+					wordType = WordType.ADVERB.toString();
+				}
+				
+				Word newWord = RandomInsults.wordDAO.createWord(spinnerText, text, "default");
+				System.out.println(newWord.getWord() + " is type " + newWord.getType());
 			}
 		});
 	}
-
 }

@@ -17,12 +17,12 @@ import edu.rit.se.agile.data.WordDAO;
 import edu.rit.se.agile.data.WordsTemplate;
 
 public class RandomInsults extends GenericActivity {
-
+	public static WordDAO wordDAO;
+	public static TemplateDAO templateDAO;
+	
 	private Button generateButton;
 	private Button favoriteButton;
 	private TextView insultTextField;
-	private TemplateDAO templateDAO;
-	private WordDAO wordDAO;
 	private Spinner categorySpinner;
 	private Random rand = new Random();
 	
@@ -77,26 +77,5 @@ public class RandomInsults extends GenericActivity {
 			}
 			
 		});
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		wordDAO.close();
-		templateDAO.close();
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		wordDAO.close();
-		templateDAO.close();
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		wordDAO.open();
-		templateDAO.open();
 	}
 }
