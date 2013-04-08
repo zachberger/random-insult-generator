@@ -1,6 +1,7 @@
 package edu.rit.se.agile.randominsultapp;
 
 import java.util.List;
+import java.util.Random;
 
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class RandomInsults extends GenericActivity {
 	private TemplateDAO templateDAO;
 	private WordDAO wordDAO;
 	private Spinner categorySpinner;
+	private Random rand = new Random();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,12 @@ public class RandomInsults extends GenericActivity {
 			@Override
 			public void onClick(View v) {
 				List<Template> temp = templateDAO.getAllTemplates();
+				
 				insultTextField.setText("Some insult.");
+				
 				if(temp.size() > 0 ) {
-					insultTextField.setText(temp.get(0).getTemplate());
+					int randomTemplate = rand.nextInt(temp.size() -1);
+					insultTextField.setText(temp.get(randomTemplate).getTemplate());
 				}
 			}
 			
