@@ -1,8 +1,16 @@
 package edu.rit.se.agile.data;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseTemplate extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "template";
@@ -36,15 +44,33 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 	 * 
 	 */
 	private static final String IMPORT_FILE_NAME = "template.csv";	
+	private Context ctx;
 
 	public DatabaseTemplate(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		// TODO Auto-generated constructor stub
+		this.ctx = context;
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DATABASE_CREATE);
+		try {
+			AssetManager am = ctx.getAssets();
+			InputStream iStream = am.open(IMPORT_FILE_NAME);
+			BufferedReader bReader = new BufferedReader(new InputStreamReader(iStream));
+			
+			String content;
+			while((content = bReader.readLine()) != null) {
+				Log.println(Log.VERBOSE, "Testing", "" + content);
+				String[] splitStr = content.split(",") ;
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

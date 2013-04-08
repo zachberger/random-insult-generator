@@ -35,12 +35,9 @@ public class RandomInsults extends GenericActivity {
 		generateButton = (Button) findViewById(R.id.button_generate);
 		favoriteButton = (Button) findViewById(R.id.button_save_favorite);
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
-
-		templateDAO = new TemplateDAO(this);
-		wordDAO  = new WordDAO(this);
-
-		templateDAO.open();
+		
 		wordDAO.open();
+		templateDAO.open();
 		
 		categorySpinner.setAdapter(
 				new SimpleCursorAdapter(this, 

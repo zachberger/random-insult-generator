@@ -1,7 +1,10 @@
 package edu.rit.se.agile.randominsultapp;
 
+import edu.rit.se.agile.data.TemplateDAO;
+import edu.rit.se.agile.data.WordDAO;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -37,6 +40,16 @@ public class GenericActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		RandomInsults.wordDAO = new WordDAO(this);
+		RandomInsults.templateDAO = new TemplateDAO(this);
+		
+		RandomInsults.wordDAO.open();
+		RandomInsults.templateDAO.open();
+	}
 	@Override
 	public void onPause() {
 		super.onPause();
