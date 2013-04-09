@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import edu.rit.se.agile.randominsultapp.RandomInsults;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,6 +32,7 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 
 	//The seperator string for the csv file to seperate entries.
 	private static final String SEPERATOR = ",";
+	private static boolean tableInitialized = false;
 
 	/*
 	 * The filename for the template csv file.
@@ -43,7 +46,7 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 	 * 
 	 * 
 	 */
-	private static final String IMPORT_FILE_NAME = "template.csv";	
+	private static final String IMPORT_FILE_NAME = "templates.csv";	
 	private Context ctx;
 
 	public DatabaseTemplate(Context context) {
@@ -51,10 +54,12 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 		// TODO Auto-generated constructor stub
 		this.ctx = context;
 	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(DATABASE_CREATE);
+	
+	public boolean getDatabaseInitialized() {
+		return tableInitialized;
+	}
+	
+	public void initializeDatabase() {
 		try {
 			AssetManager am = ctx.getAssets();
 			InputStream iStream = am.open(IMPORT_FILE_NAME);
@@ -63,7 +68,8 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 			String content;
 			while((content = bReader.readLine()) != null) {
 				Log.println(Log.VERBOSE, "Testing", "" + content);
-				String[] splitStr = content.split(",") ;
+				String[] splitStr = content.split(SEPERATOR) ;
+				RandomInsults.templateDAO.createTemplate(splitStr[2], splitStr[1]);
 				
 			}
 		} catch (FileNotFoundException e) {
@@ -71,6 +77,14 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		tableInitialized = true;
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(DATABASE_CREATE);
+		tableInitialized = false;
+		
 
 	}
 

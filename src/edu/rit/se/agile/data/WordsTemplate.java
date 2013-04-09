@@ -25,6 +25,8 @@ public class WordsTemplate extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "words.db";
 	private static final int DATABASE_VERSION = 1;
 
+	private static boolean tableInitialized = false;
+
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
 			+ TABLE_NAME + "(" + COLUMN_ID + " integer primary key autoincrement, " 
@@ -52,26 +54,44 @@ public class WordsTemplate extends SQLiteOpenHelper {
 		ctx = context;
 	}
 
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(DATABASE_CREATE);
+	public boolean getDatabaseInitialized() {
+		return tableInitialized;
+	}
+
+	public void initializeDatabase() {
+		InputStream iStream = null;
 		try {
 			AssetManager am = ctx.getAssets();
-			InputStream iStream = am.open(IMPORT_FILE_NAME);
+			iStream = am.open(IMPORT_FILE_NAME);
 			BufferedReader bReader = new BufferedReader(new InputStreamReader(iStream));
-			
+
 			String content;
 			while((content = bReader.readLine()) != null) {
 				Log.println(Log.VERBOSE, "Testing", "" + content);
-				String[] splitStr = content.split(",") ;
+				String[] splitStr = content.split(SEPERATOR) ;
 				//RandomInsults.wordDAO.createWord(splitStr[1], splitStr[2], splitStr[3]);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if(iStream != null) {
+				try {
+					iStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
+		tableInitialized = true;
+	}
 
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(DATABASE_CREATE);
+		tableInitialized = false;
 
 	}
 

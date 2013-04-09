@@ -21,7 +21,7 @@ public class Template {
 		return template;
 	}
 	
-	public void setTemplate(String templete) {
+	public void setTemplate(String template) {
 		this.template = template;
 	}
 	public String getCategory() {
@@ -82,4 +82,11 @@ public class Template {
 	    }
 		return count;
 	}
+
+	@Override
+	public String toString() {
+		return "Template [id=" + id + ", template=" + template + ", category="
+				+ category + "]";
+	}
+	
 }

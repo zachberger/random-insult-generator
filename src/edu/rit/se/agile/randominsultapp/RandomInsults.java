@@ -19,26 +19,23 @@ import edu.rit.se.agile.data.WordsTemplate;
 public class RandomInsults extends GenericActivity {
 	public static WordDAO wordDAO;
 	public static TemplateDAO templateDAO;
-	
+
 	private Button generateButton;
 	private Button favoriteButton;
 	private TextView insultTextField;
 	private Spinner categorySpinner;
 	private Random rand = new Random();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_random_insults);
-		
+
 		insultTextField = (TextView) findViewById( R.id.insult_display );
 		generateButton = (Button) findViewById(R.id.button_generate);
 		favoriteButton = (Button) findViewById(R.id.button_save_favorite);
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
-		
-		wordDAO.open();
-		templateDAO.open();
-		
+
 		categorySpinner.setAdapter(
 				new SimpleCursorAdapter(this, 
 						R.id.category_list, 
@@ -46,33 +43,33 @@ public class RandomInsults extends GenericActivity {
 						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
 						new int[]{ R.id.category_list }, 
 						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
-		
+
 		generateButton.setOnClickListener( new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				List<Template> temp = templateDAO.getAllTemplates();
-				
+
 				insultTextField.setText("Some insult.");
-				
+
 				if(temp.size() > 0 ) {
-					int randomTemplate = rand.nextInt(temp.size() -1);
+					int randomTemplate = rand.nextInt(temp.size() -1); 
 					insultTextField.setText(temp.get(randomTemplate).getTemplate());
 				}
 			}
-			
+
 		});
-		
+
 		favoriteButton.setOnClickListener( new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(RandomInsults.this, 
-							   "Saved to favorites.", 
-							   Toast.LENGTH_LONG).show();
-				
+						"Saved to favorites.", 
+						Toast.LENGTH_LONG).show();
+
 			}
-			
+
 		});
 	}
 }

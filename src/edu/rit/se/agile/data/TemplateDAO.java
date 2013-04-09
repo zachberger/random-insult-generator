@@ -29,19 +29,25 @@ public class TemplateDAO {
 		database.close();
 	}
 
+	public void populateDatabase() {
+		if(!dbHelper.getDatabaseInitialized()) {
+			dbHelper.initializeDatabase();
+		}
+	}
 
-	public Template createTemplate(String value) {
+	public Template createTemplate(String value, String category) {
 		ContentValues values = new ContentValues();
 		values.put(dbHelper.COLUMN_TEMPLATE, value);
+		values.put(dbHelper.COLUMN_CATEGORY, category);
 		long insertId = database.insert(dbHelper.TABLE_NAME, null,
 				values);
 		Cursor cursor = database.query(dbHelper.TABLE_NAME,
-				allColumns, dbHelper.COLUMN_ID + " = " + insertId, null,
+				allColumns, null, null,
 				null, null, null);
 		cursor.moveToFirst();
-		Template newTemplete = cursorToTemplate(cursor);
+//		Template newTemplete = cursorToTemplate(cursor);
 		cursor.close();
-		return newTemplete;
+		return null;
 	}
 
 	public void deleteTemplate(Template template) {
@@ -55,7 +61,7 @@ public class TemplateDAO {
 		Template comment = new Template();
 		comment.setId(cursor.getLong(0));
 		comment.setCategory(cursor.getString(1));
-		comment.setTemplate(cursor.getString(1));
+		comment.setTemplate(cursor.getString(2));
 		return comment;
 	}
 

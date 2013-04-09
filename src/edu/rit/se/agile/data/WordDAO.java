@@ -30,6 +30,12 @@ public class WordDAO {
 		database.close();
 	}
 	
+	public void populateDatabase() {
+		if(!dbHelper.getDatabaseInitialized()) {
+			dbHelper.initializeDatabase();
+		}
+	}
+	
 	public Word createWord(String type, String value, String category) {
 		ContentValues values = new ContentValues();
 		values.put(dbHelper.COLUMN_WORD, value);
@@ -38,7 +44,7 @@ public class WordDAO {
 		long insertId = database.insert(dbHelper.TABLE_NAME, null,
 				values);
 		Cursor cursor = database.query(dbHelper.TABLE_NAME,
-				allColumns, dbHelper.COLUMN_ID + " = " + insertId, null,
+				allColumns, null, null,
 				null, null, null);
 		cursor.moveToFirst();
 		Word newWord = cursorToWord(cursor);
