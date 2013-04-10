@@ -32,7 +32,7 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 
 	//The seperator string for the csv file to seperate entries.
 	private static final String SEPERATOR = ",";
-	private static boolean tableInitialized = false;
+	private static boolean tableInitialized = true;
 
 	/*
 	 * The filename for the template csv file.

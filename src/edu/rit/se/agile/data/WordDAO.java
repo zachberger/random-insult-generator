@@ -85,6 +85,26 @@ public class WordDAO {
 		return comments;
 	}
 	
+	public List<Word> getAllWords(String category) {
+		List<Word> words = new ArrayList<Word>();
+		String[] whereArgs = new String[] {
+			    category
+			};
+
+		Cursor cursor = database.query(dbHelper.TABLE_NAME,
+				allColumns, dbHelper.COLUMN_WORD_TYPE + " = ? ", whereArgs, null, null, null);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Word comment = cursorToWord(cursor);
+			words.add(comment);
+			cursor.moveToNext();
+		}
+		// Make sure to close the cursor
+		cursor.close();
+		return words;
+	}
+	
 	public Cursor getCategories() {
 		return database.query(dbHelper.TABLE_NAME, category, null, null, null, null, null);
 	}

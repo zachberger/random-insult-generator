@@ -44,7 +44,7 @@ public class Template {
 		Pattern verbPattern = Pattern.compile(WordType.VERB.val());
 		
 		List<Word> adjWords = wordDAO.getAllWords();
-//		List<Word> advWords = wordDAO.getAllWords();
+		List<Word> advWords = wordDAO.getAllWords(WordType.ADVERB.toString());
 //		List<Word> nounWords = wordDAO.getAllWords();
 //		List<Word> verbWords = wordDAO.getAllWords();
 		if(adjWords.size() <= 0) {
@@ -52,7 +52,7 @@ public class Template {
 			fake.setWord("FAKE_WORD");
 			adjWords.add(fake);
 		}
-		List<Word> advWords = adjWords;
+//		List<Word> advWords = adjWords;
 		List<Word> nounWords = adjWords;
 		List<Word> verbWords = adjWords;
 		
