@@ -49,12 +49,12 @@ public class RandomInsults extends GenericActivity {
 			@Override
 			public void onClick(View v) {
 				List<Template> temp = templateDAO.getAllTemplates();
-
 				insultTextField.setText("Some insult.");
 
 				if(temp.size() > 0 ) {
-					int randomTemplate = rand.nextInt(temp.size() -1); 
-					insultTextField.setText(temp.get(randomTemplate).getTemplate());
+					int randomTemplate = rand.nextInt(temp.size() -1);
+//					insultTextField.setText(temp.get(randomTemplate).getTemplate());
+					insultTextField.setText(temp.get(randomTemplate).fillTemplate(wordDAO));
 				}
 			}
 
