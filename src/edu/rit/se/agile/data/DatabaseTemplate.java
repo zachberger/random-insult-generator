@@ -84,7 +84,6 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DATABASE_CREATE);
 		tableInitialized = false;
-		
 
 	}
 

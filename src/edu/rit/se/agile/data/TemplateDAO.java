@@ -45,7 +45,7 @@ public class TemplateDAO {
 				allColumns, null, null,
 				null, null, null);
 		cursor.moveToFirst();
-//		Template newTemplete = cursorToTemplate(cursor);
+		Template newTemplete = cursorToTemplate(cursor);
 		cursor.close();
 		return null;
 	}
