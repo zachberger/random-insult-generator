@@ -1,5 +1,7 @@
 package edu.rit.se.agile.data;
 
+import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +33,57 @@ public class Template {
 		this.category = category;
 	}
 	
+	public String fillTemplate(WordDAO wordDAO) {
+		String insult = template;
+		
+		Random rand = new Random();
+		
+		Pattern adjPattern  = Pattern.compile(WordType.ADJECTIVE.val());
+		Pattern advPattern  = Pattern.compile(WordType.ADVERB.val());
+		Pattern nounPattern = Pattern.compile(WordType.NOUN.val());
+		Pattern verbPattern = Pattern.compile(WordType.VERB.val());
+		
+		List<Word> adjWords = wordDAO.getAllWords();
+//		List<Word> advWords = wordDAO.getAllWords();
+//		List<Word> nounWords = wordDAO.getAllWords();
+//		List<Word> verbWords = wordDAO.getAllWords();
+		if(adjWords.size() <= 0) {
+			Word fake = new Word();
+			fake.setWord("FAKE_WORD");
+			adjWords.add(fake);
+		}
+		List<Word> advWords = adjWords;
+		List<Word> nounWords = adjWords;
+		List<Word> verbWords = adjWords;
+		
+		
+		//Replace all Adjective placeholders in the template with an appropriate word.
+		for(int i=0; i<this.adjCount(); i++) {
+			int randWord = rand.nextInt(adjWords.size()-1);
+			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
+		}
+
+		//Replace all Adverb placeholders in the template with an appropriate word.
+		for(int i=0; i<this.adjCount(); i++) {
+			int randWord = rand.nextInt(adjWords.size()-1);
+			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
+		}
+
+		//Replace all Noun placeholders in the template with an appropriate word.
+		for(int i=0; i<this.adjCount(); i++) {
+			int randWord = rand.nextInt(adjWords.size()-1);
+			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
+		}
+
+		//Replace all Verb placeholders in the template with an appropriate word.
+		for(int i=0; i<this.adjCount(); i++) {
+			int randWord = rand.nextInt(adjWords.size()-1);
+			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
+		}
+		
+		return insult;
+		
+	}
 	/**
 	 * Returns how many adjective placeholders are in the template.
 	 */
