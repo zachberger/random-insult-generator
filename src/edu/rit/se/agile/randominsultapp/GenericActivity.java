@@ -52,9 +52,9 @@ public class GenericActivity extends Activity {
 		RandomInsults.templateDAO.open();
 		
 //		RandomInsults.wordDAO.populateDatabase();
-//		RandomInsults.templateDAO.populateDatabase();
+		RandomInsults.templateDAO.populateDatabase();
 		
-		RandomInsults.templateDAO.createTemplate("This is an insult", "Default");
+//		RandomInsults.templateDAO.createTemplate("This is an insult", "Default");
 	}
 	@Override
 	public void onPause() {

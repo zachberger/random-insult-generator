@@ -69,7 +69,7 @@ public class WordsTemplate extends SQLiteOpenHelper {
 			while((content = bReader.readLine()) != null) {
 				Log.println(Log.VERBOSE, "Testing", "" + content);
 				String[] splitStr = content.split(SEPERATOR) ;
-				//RandomInsults.wordDAO.createWord(splitStr[1], splitStr[2], splitStr[3]);
+//				RandomInsults.wordDAO.createWord(splitStr[1], splitStr[2], splitStr[3]);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

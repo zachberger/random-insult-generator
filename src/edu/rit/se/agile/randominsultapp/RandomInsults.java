@@ -36,13 +36,13 @@ public class RandomInsults extends GenericActivity {
 		favoriteButton = (Button) findViewById(R.id.button_save_favorite);
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
 
-		categorySpinner.setAdapter(
-				new SimpleCursorAdapter(this, 
-						R.id.category_list, 
-						wordDAO.getCategories(), 
-						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
-						new int[]{ R.id.category_list }, 
-						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
+//		categorySpinner.setAdapter(
+//				new SimpleCursorAdapter(this, 
+//						R.id.category_list, 
+//						wordDAO.getCategories(), 
+//						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
+//						new int[]{ R.id.category_list }, 
+//						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
 
 		generateButton.setOnClickListener( new OnClickListener() {
 
