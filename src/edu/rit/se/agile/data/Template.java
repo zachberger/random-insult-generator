@@ -1,5 +1,6 @@
 package edu.rit.se.agile.data;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -43,45 +44,37 @@ public class Template {
 		Pattern nounPattern = Pattern.compile(WordType.NOUN.val());
 		Pattern verbPattern = Pattern.compile(WordType.VERB.val());
 		
-		List<Word> adjWords = wordDAO.getAllWords();
-		List<Word> advWords = wordDAO.getAllWords(WordType.ADVERB.toString());
-//		List<Word> nounWords = wordDAO.getAllWords();
-//		List<Word> verbWords = wordDAO.getAllWords();
-		if(adjWords.size() <= 0) {
-			Word fake = new Word();
-			fake.setWord("FAKE_WORD");
-			adjWords.add(fake);
-		}
-//		List<Word> advWords = adjWords;
-		List<Word> nounWords = adjWords;
-		List<Word> verbWords = adjWords;
+		List<Word> adjWords = wordDAO.getAllWords(WordType.ADJECTIVE.val());
+		List<Word> advWords = wordDAO.getAllWords(WordType.ADVERB.val());
+		List<Word> nounWords = wordDAO.getAllWords(WordType.NOUN.val());
+		List<Word> verbWords = wordDAO.getAllWords(WordType.VERB.val());
+		
+		Collections.shuffle(adjWords);
+		Collections.shuffle(advWords);
+		Collections.shuffle(nounWords);
+		Collections.shuffle(verbWords);
 		
 		
-		//Replace all Adjective placeholders in the template with an appropriate word.
-		for(int i=0; i<this.adjCount(); i++) {
-			int randWord = rand.nextInt(adjWords.size()-1);
-			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
-		}
-
-		//Replace all Adverb placeholders in the template with an appropriate word.
-		for(int i=0; i<this.adjCount(); i++) {
-			int randWord = rand.nextInt(adjWords.size()-1);
-			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
-		}
-
-		//Replace all Noun placeholders in the template with an appropriate word.
-		for(int i=0; i<this.adjCount(); i++) {
-			int randWord = rand.nextInt(adjWords.size()-1);
-			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
-		}
-
-		//Replace all Verb placeholders in the template with an appropriate word.
-		for(int i=0; i<this.adjCount(); i++) {
-			int randWord = rand.nextInt(adjWords.size()-1);
-			insult.replaceFirst(adjPattern.pattern(), adjWords.get(randWord).getWord());
+		String[] insultSplit = insult.split("\\s+");
+		String toReturn = "";
+		int count = 0;
+		while(count < insultSplit.length) {
+			if(insultSplit[count].contains(WordType.ADJECTIVE.val())) {
+				insultSplit[count] = insultSplit[count].replace(WordType.ADJECTIVE.val(), adjWords.get(0).getWord());
+			} else if (insultSplit[count].contains(WordType.ADVERB.val())) {
+				insultSplit[count] = insultSplit[count].replace(WordType.ADVERB.val(), advWords.get(0).getWord());
+			} else if (insultSplit[count].contains(WordType.NOUN.val())) {
+				insultSplit[count] = insultSplit[count].replace(WordType.NOUN.val(), nounWords.get(0).getWord());
+			} else if (insultSplit[count].contains(WordType.VERB.val())) {
+				insultSplit[count] = insultSplit[count].replace(WordType.VERB.val(), verbWords.get(0).getWord());
+			} 
+			toReturn +=  " " + insultSplit[count]; 
+			count++;
 		}
 		
-		return insult;
+		
+		
+		return toReturn;
 		
 	}
 	/**

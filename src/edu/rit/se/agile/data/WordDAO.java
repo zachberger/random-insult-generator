@@ -63,8 +63,8 @@ public class WordDAO {
 		Word comment = new Word();
 		comment.setId(cursor.getLong(0));
 		comment.setType(cursor.getString(1));
-		comment.setCategory(cursor.getString(2));
-		comment.setWord(cursor.getString(3));
+		comment.setCategory(cursor.getString(3));
+		comment.setWord(cursor.getString(2));
 		return comment;
 	}
 
