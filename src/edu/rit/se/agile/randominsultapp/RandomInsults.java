@@ -3,6 +3,7 @@ package edu.rit.se.agile.randominsultapp;
 import java.util.List;
 import java.util.Random;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,13 +37,15 @@ public class RandomInsults extends GenericActivity {
 		favoriteButton = (Button) findViewById(R.id.button_save_favorite);
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
 
-//		categorySpinner.setAdapter(
-//				new SimpleCursorAdapter(this, 
-//						R.id.category_list, 
-//						wordDAO.getCategories(), 
-//						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
-//						new int[]{ R.id.category_list }, 
-//						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
+		Cursor categoryCursor = wordDAO.getCategories();
+		
+		categorySpinner.setAdapter(
+				new SimpleCursorAdapter(this, 
+						R.layout.category_list, 
+						categoryCursor, 
+						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
+						new int[]{ R.id.category_list_entry }, 
+						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
 
 		generateButton.setOnClickListener( new OnClickListener() {
 
