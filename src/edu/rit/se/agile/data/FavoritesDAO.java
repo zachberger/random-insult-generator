@@ -13,7 +13,7 @@ public class FavoritesDAO {
 	private SQLiteDatabase database;
 	private FavoritesTemplate dbHelper;
 	private String[] allColumns = { FavoritesTemplate.COLUMN_ID,
-			FavoritesTemplate.COLUMN_TEMPLATE };
+			FavoritesTemplate.FAVORITES_COLUMN };
 
 
 	public FavoritesDAO(Context context) {
@@ -30,7 +30,7 @@ public class FavoritesDAO {
 
 	public String createFavorite(String value) {
 		ContentValues values = new ContentValues();
-		values.put(FavoritesTemplate.COLUMN_TEMPLATE, value);
+		values.put(FavoritesTemplate.FAVORITES_COLUMN, value);
 		long insertId = database.insert(FavoritesTemplate.TABLE_NAME, null,
 				values);
 		Cursor cursor = database.query(FavoritesTemplate.TABLE_NAME,
