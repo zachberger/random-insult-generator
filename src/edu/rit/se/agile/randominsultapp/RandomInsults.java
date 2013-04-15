@@ -46,8 +46,8 @@ public class RandomInsults extends GenericActivity {
 
 			@Override
 			public void onClick(View v) {
+				String category = categorySpinner.getSelectedItem().toString();
 				List<Template> temp = templateDAO.getAllTemplates();
-				insultTextField.setText("Some insult.");
 
 				if(temp.size() > 0 ) {
 					int randomTemplate = rand.nextInt(temp.size() -1);
@@ -55,7 +55,10 @@ public class RandomInsults extends GenericActivity {
 					String text = temp.get(randomTemplate).fillTemplate(wordDAO).trim();
 					text = Character.toUpperCase(text.charAt(0)) + text.substring(1);
 					insultTextField.setText(text);
+				} else {
+					insultTextField.setText("There was an error! :(");
 				}
+//				insultTextField.setText(category);
 			}
 
 		});
