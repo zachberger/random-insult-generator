@@ -81,4 +81,21 @@ public class TemplateDAO {
 		cursor.close();
 		return comments;
 	}
+	
+	public List<Template> getAllTemplates(String category) {
+		List<Template> templates = new ArrayList<Template>();
+
+		Cursor cursor = database.query(DatabaseTemplate.TABLE_NAME,
+				allColumns, DatabaseTemplate.COLUMN_CATEGORY + "=?", new String[]{category}, null, null, null);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Template comment = cursorToTemplate(cursor);
+			templates.add(comment);
+			cursor.moveToNext();
+		}
+		// Make sure to close the cursor
+		cursor.close();
+		return templates;
+	}
 }

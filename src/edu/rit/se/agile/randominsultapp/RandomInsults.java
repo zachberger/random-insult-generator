@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,8 +47,8 @@ public class RandomInsults extends GenericActivity {
 
 			@Override
 			public void onClick(View v) {
-				String category = categorySpinner.getSelectedItem().toString();
-				List<Template> temp = templateDAO.getAllTemplates();
+				String category = ((Cursor) categorySpinner.getSelectedItem()).getString(0); //My spinnah thing
+				List<Template> temp = templateDAO.getAllTemplates(category); 
 
 				if(temp.size() > 0 ) {
 					int randomTemplate = rand.nextInt(temp.size() -1);
@@ -58,7 +59,6 @@ public class RandomInsults extends GenericActivity {
 				} else {
 					insultTextField.setText("There was an error! :(");
 				}
-//				insultTextField.setText(category);
 			}
 
 		});
