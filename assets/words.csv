@@ -58,10 +58,10 @@
 58,#VERB,none,mongle
 59,#VERB,none,slobber
 60,#VERB,vulgar,suck
-61,#ADV,vulgar,fucking
+61,#VERB,none,defenestrate
 62,#ADV,vulgar,shittly
 63,#ADV,vulgar,bitchily
-64,#ADV,none,affectionately
+64,#ADV,vulgar,fucking
 65,#ADV,none,gingerly
 66,#ADV,none,brutally
 67,#ADV,none,comfortably
@@ -78,3 +78,5 @@
 78,#ADV,none,recklessly
 79,#ADV,none,skillfully
 80,#ADV,none,tenderly
+81,#ADV,none,affectionately
+82,#ADV,none,cordially

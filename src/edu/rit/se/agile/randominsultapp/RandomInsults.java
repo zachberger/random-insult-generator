@@ -64,10 +64,11 @@ public class RandomInsults extends GenericActivity {
 
 			@Override
 			public void onClick(View v) {
+				favoritesDAO.createFavorite(insultTextField.getText().toString());
 				Toast.makeText(RandomInsults.this, 
 						"Saved to favorites.", 
 						Toast.LENGTH_LONG).show();
-
+				
 			}
 
 		});
