@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FavoritesTemplate extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "favorites";
 	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_TEMPLATE = "template";
+	public static final String COLUMN_TEMPLATE = "favoriate";
 
 	private static final String DATABASE_NAME = "favorites.db";
 	private static final int DATABASE_VERSION = 1;

@@ -11,13 +11,13 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class FavoritesDAO {
 	private SQLiteDatabase database;
-	private DatabaseTemplate dbHelper;
+	private FavoritesTemplate dbHelper;
 	private String[] allColumns = { FavoritesTemplate.COLUMN_ID,
 			FavoritesTemplate.COLUMN_TEMPLATE };
 
 
 	public FavoritesDAO(Context context) {
-		dbHelper = new DatabaseTemplate(context);
+		dbHelper = new FavoritesTemplate(context);
 	}
 
 	public void open() throws SQLException {
@@ -26,12 +26,6 @@ public class FavoritesDAO {
 
 	public void close() {
 		database.close();
-	}
-
-	public void populateDatabase() {
-		if(!dbHelper.getDatabaseInitialized()) {
-			dbHelper.initializeDatabase();
-		}
 	}
 
 	public String createFavorite(String value) {
