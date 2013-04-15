@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import edu.rit.se.agile.randominsultapp.RandomInsults;
+import edu.rit.se.agile.randominsultapp.GenericActivity;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -69,7 +69,7 @@ public class WordsTemplate extends SQLiteOpenHelper {
 			while((content = bReader.readLine()) != null) {
 				Log.println(Log.VERBOSE, "Testing", "" + content);
 				String[] splitStr = content.split(SEPERATOR) ;
-				RandomInsults.wordDAO.createWord(splitStr[1], splitStr[3], splitStr[2]);
+				GenericActivity.wordDAO.createWord(splitStr[1], splitStr[2], splitStr[3]);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

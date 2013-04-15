@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import edu.rit.se.agile.randominsultapp.RandomInsults;
+import edu.rit.se.agile.randominsultapp.GenericActivity;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -68,7 +68,7 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 			String content;
 			while((content = bReader.readLine()) != null) {
 				String[] splitStr = content.split(SEPERATOR) ;
-				RandomInsults.templateDAO.createTemplate(splitStr[2], splitStr[1]);
+				GenericActivity.templateDAO.createTemplate(splitStr[2], splitStr[1]);
 				
 			}
 		} catch (FileNotFoundException e) {
