@@ -41,7 +41,7 @@ public class AddWord extends GenericActivity {
 					wordType = WordType.ADVERB.val();
 				}
 				
-				Word newWord = wordDAO.createWord(spinnerText, text, "none");
+				Word newWord = wordDAO.createWord(wordType, text, "none");
 				Toast.makeText(v.getContext(), 
 						newWord.getWord() + " was added.",
 						Toast.LENGTH_SHORT).show();
