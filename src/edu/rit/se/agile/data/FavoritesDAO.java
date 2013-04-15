@@ -81,4 +81,8 @@ public class FavoritesDAO {
 		cursor.close();
 		return comments;
 	}
+	
+	public Cursor getAllFavoritesCursor() {
+		return database.query(FavoritesTemplate.TABLE_NAME,	allColumns, null, null, null, null, null);
+	}
 }

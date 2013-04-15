@@ -106,6 +106,7 @@ public class WordDAO {
 	}
 	
 	public Cursor getCategories() {
+//		return database.rawQuery("Select DISTINCT " + category + " from " + WordsTemplate.TABLE_NAME, null);
 		return database.query(WordsTemplate.TABLE_NAME, category, null, null, null, null, null);
 	}
 
