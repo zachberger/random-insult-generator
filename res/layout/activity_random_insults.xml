@@ -31,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/category_spinner"
         android:layout_below="@+id/category_spinner"
-        android:text="@string/default_insult" />
+        android:text="@string/default_insult"
+        android:textSize="36sp" />
 
     <Button
         android:id="@+id/button_generate"

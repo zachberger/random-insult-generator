@@ -57,7 +57,9 @@ public class RandomInsults extends GenericActivity {
 				if(temp.size() > 0 ) {
 					int randomTemplate = rand.nextInt(temp.size() -1);
 //					insultTextField.setText(temp.get(randomTemplate).getTemplate());
-					insultTextField.setText(temp.get(randomTemplate).fillTemplate(wordDAO));
+					String text = temp.get(randomTemplate).fillTemplate(wordDAO).trim();
+					text = Character.toUpperCase(text.charAt(0)) + text.substring(1);
+					insultTextField.setText(text);
 				}
 			}
 
