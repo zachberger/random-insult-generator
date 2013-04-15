@@ -29,21 +29,21 @@ public class AddWord extends GenericActivity {
 			public void onClick(View v) {
 				String text = textField.getText().toString();
 				String spinnerText = spinner.getSelectedItem().toString().toLowerCase();
-				String wordType;
+				String wordType = "";
 				
 				if (spinnerText.equals("noun")) {
-					wordType = WordType.NOUN.toString();
+					wordType = WordType.NOUN.val();
 				} else if (spinnerText.equals("verb")) {
-					wordType = WordType.VERB.toString();
+					wordType = WordType.VERB.val();
 				} else if (spinnerText.equals("adjective")) {
-					wordType = WordType.ADJECTIVE.toString();
+					wordType = WordType.ADJECTIVE.val();
 				} else if (spinnerText.equals("adverb")) {
-					wordType = WordType.ADVERB.toString();
+					wordType = WordType.ADVERB.val();
 				}
 				
-				Word newWord = RandomInsults.wordDAO.createWord(spinnerText, text, "default");
+				Word newWord = RandomInsults.wordDAO.createWord(wordType, text, "none");
 				Toast.makeText(v.getContext(), 
-						newWord.getWord() + " is type " + newWord.getType(), 
+						newWord.getWord() + " is type " + newWord.getType(),
 						Toast.LENGTH_SHORT).show();
 			}
 		});

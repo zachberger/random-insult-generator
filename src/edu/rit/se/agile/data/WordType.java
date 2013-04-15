@@ -20,7 +20,7 @@ public enum WordType {
 		this.placeholder = placeholder;
 	}
 	
-	String val() {
+	public String val() {
 		return placeholder;
 	}
 }
