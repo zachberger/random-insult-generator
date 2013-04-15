@@ -41,10 +41,12 @@ public class AddWord extends GenericActivity {
 					wordType = WordType.ADVERB.val();
 				}
 				
-				Word newWord = wordDAO.createWord(spinnerText, text, "default");
+				Word newWord = wordDAO.createWord(spinnerText, text, "none");
 				Toast.makeText(v.getContext(), 
-						newWord.getWord() + " is type " + newWord.getType(),
+						newWord.getWord() + " was added.",
 						Toast.LENGTH_SHORT).show();
+				
+				textField.setText("");
 			}
 		});
 	}
