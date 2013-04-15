@@ -37,23 +37,23 @@ public class TemplateDAO {
 
 	public Template createTemplate(String value, String category) {
 		ContentValues values = new ContentValues();
-		values.put(dbHelper.COLUMN_TEMPLATE, value);
-		values.put(dbHelper.COLUMN_CATEGORY, category);
-		long insertId = database.insert(dbHelper.TABLE_NAME, null,
+		values.put(DatabaseTemplate.COLUMN_TEMPLATE, value);
+		values.put(DatabaseTemplate.COLUMN_CATEGORY, category);
+		long insertId = database.insert(DatabaseTemplate.TABLE_NAME, null,
 				values);
-		Cursor cursor = database.query(dbHelper.TABLE_NAME,
+		Cursor cursor = database.query(DatabaseTemplate.TABLE_NAME,
 				allColumns, null, null,
 				null, null, null);
 		cursor.moveToFirst();
 		Template newTemplete = cursorToTemplate(cursor);
 		cursor.close();
-		return null;
+		return newTemplete;
 	}
 
 	public void deleteTemplate(Template template) {
 		long id = template.getId();
 		System.out.println("Comment deleted with id: " + id);
-		database.delete(dbHelper.TABLE_NAME, dbHelper.COLUMN_ID
+		database.delete(DatabaseTemplate.TABLE_NAME, DatabaseTemplate.COLUMN_ID
 				+ " = " + id, null);
 	}
 
@@ -68,7 +68,7 @@ public class TemplateDAO {
 	public List<Template> getAllTemplates() {
 		List<Template> comments = new ArrayList<Template>();
 
-		Cursor cursor = database.query(dbHelper.TABLE_NAME,
+		Cursor cursor = database.query(DatabaseTemplate.TABLE_NAME,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
