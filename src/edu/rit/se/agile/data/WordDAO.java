@@ -38,12 +38,12 @@ public class WordDAO {
 	
 	public Word createWord(String type, String value, String category) {
 		ContentValues values = new ContentValues();
-		values.put(dbHelper.COLUMN_WORD, value);
-		values.put(dbHelper.COLUMN_WORD_TYPE, type);
-		values.put(dbHelper.COLUMN_CATEGORY, category);
-		long insertId = database.insert(dbHelper.TABLE_NAME, null,
+		values.put(WordsTemplate.COLUMN_WORD, value);
+		values.put(WordsTemplate.COLUMN_WORD_TYPE, type);
+		values.put(WordsTemplate.COLUMN_CATEGORY, category);
+		long insertId = database.insert(WordsTemplate.TABLE_NAME, null,
 				values);
-		Cursor cursor = database.query(dbHelper.TABLE_NAME,
+		Cursor cursor = database.query(WordsTemplate.TABLE_NAME,
 				allColumns, null, null,
 				null, null, null);
 		cursor.moveToFirst();
@@ -55,7 +55,7 @@ public class WordDAO {
 	public void deleteWord(Word word) {
 		long id = word.getId();
 		System.out.println("Comment deleted with id: " + id);
-		database.delete(dbHelper.TABLE_NAME, dbHelper.COLUMN_ID
+		database.delete(WordsTemplate.TABLE_NAME, WordsTemplate.COLUMN_ID
 				+ " = " + id, null);
 	}
 
@@ -71,7 +71,7 @@ public class WordDAO {
 	public List<Word> getAllWords() {
 		List<Word> comments = new ArrayList<Word>();
 
-		Cursor cursor = database.query(dbHelper.TABLE_NAME,
+		Cursor cursor = database.query(WordsTemplate.TABLE_NAME,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
@@ -85,14 +85,14 @@ public class WordDAO {
 		return comments;
 	}
 	
-	public List<Word> getAllWords(String category) {
+	public List<Word> getAllWords(String wordType) {
 		List<Word> words = new ArrayList<Word>();
 		String[] whereArgs = new String[] {
-			    category
+			    wordType
 			};
 
-		Cursor cursor = database.query(dbHelper.TABLE_NAME,
-				allColumns, dbHelper.COLUMN_WORD_TYPE + " = ? ", whereArgs, null, null, null);
+		Cursor cursor = database.query(WordsTemplate.TABLE_NAME,
+				allColumns, WordsTemplate.COLUMN_WORD_TYPE + " = ? ", whereArgs, null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -106,7 +106,7 @@ public class WordDAO {
 	}
 	
 	public Cursor getCategories() {
-		return database.query(dbHelper.TABLE_NAME, category, null, null, null, null, null);
+		return database.query(WordsTemplate.TABLE_NAME, category, null, null, null, null, null);
 	}
 
 }
