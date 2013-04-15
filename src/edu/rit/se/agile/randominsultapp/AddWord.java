@@ -41,7 +41,7 @@ public class AddWord extends GenericActivity {
 					wordType = WordType.ADVERB.val();
 				}
 				
-				Word newWord = RandomInsults.wordDAO.createWord(wordType, text, "none");
+				Word newWord = wordDAO.createWord(spinnerText, text, "default");
 				Toast.makeText(v.getContext(), 
 						newWord.getWord() + " is type " + newWord.getType(),
 						Toast.LENGTH_SHORT).show();

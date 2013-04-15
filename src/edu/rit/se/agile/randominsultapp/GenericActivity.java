@@ -13,6 +13,9 @@ import edu.rit.se.agile.data.WordDAO;
 public class GenericActivity extends Activity {
 	public static FavoritesDAO favoritesDAO;
 
+	public static WordDAO wordDAO;
+	public static TemplateDAO templateDAO;
+
 	public GenericActivity() {
 		super();
 	}
@@ -47,35 +50,35 @@ public class GenericActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		RandomInsults.wordDAO = new WordDAO(this);
-		RandomInsults.templateDAO = new TemplateDAO(this);
+		wordDAO = new WordDAO(this);
+		templateDAO = new TemplateDAO(this);
 		
-		RandomInsults.wordDAO.open();
-		RandomInsults.templateDAO.open();
+		wordDAO.open();
+		templateDAO.open();
 		
-		RandomInsults.wordDAO.populateDatabase();
-		RandomInsults.templateDAO.populateDatabase();
+		wordDAO.populateDatabase();
+		templateDAO.populateDatabase();
 		
-//		RandomInsults.templateDAO.createTemplate("This is an insult", "Default");
 	}
+	
 	@Override
 	public void onPause() {
 		super.onPause();
-		RandomInsults.wordDAO.close();
-		RandomInsults.templateDAO.close();
+		wordDAO.close();
+		templateDAO.close();
 	}
 	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		RandomInsults.wordDAO.close();
-		RandomInsults.templateDAO.close();
+		wordDAO.close();
+		templateDAO.close();
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
-		RandomInsults.wordDAO.open();
-		RandomInsults.templateDAO.open();
+		wordDAO.open();
+		templateDAO.open();
 	}
 }

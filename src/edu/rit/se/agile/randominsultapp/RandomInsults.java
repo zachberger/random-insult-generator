@@ -13,14 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.rit.se.agile.data.Template;
-import edu.rit.se.agile.data.TemplateDAO;
-import edu.rit.se.agile.data.WordDAO;
 import edu.rit.se.agile.data.WordsTemplate;
 
 public class RandomInsults extends GenericActivity {
-	public static WordDAO wordDAO;
-	public static TemplateDAO templateDAO;
-
 	private Button generateButton;
 	private Button favoriteButton;
 	private TextView insultTextField;
