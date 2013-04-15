@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import edu.rit.se.agile.data.FavoritesDAO;
 import edu.rit.se.agile.data.TemplateDAO;
 import edu.rit.se.agile.data.WordDAO;
 
 public class GenericActivity extends Activity {
+	public static FavoritesDAO favoritesDAO;
 
 	public GenericActivity() {
 		super();
