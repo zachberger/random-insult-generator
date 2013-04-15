@@ -52,9 +52,11 @@ public class GenericActivity extends Activity {
 		
 		wordDAO = new WordDAO(this);
 		templateDAO = new TemplateDAO(this);
+		favoritesDAO = new FavoritesDAO(this);
 		
 		wordDAO.open();
 		templateDAO.open();
+		favoritesDAO.open();
 		
 		wordDAO.populateDatabase();
 		templateDAO.populateDatabase();
@@ -66,6 +68,7 @@ public class GenericActivity extends Activity {
 		super.onPause();
 		wordDAO.close();
 		templateDAO.close();
+		favoritesDAO.close();
 	}
 	
 	@Override
@@ -73,6 +76,7 @@ public class GenericActivity extends Activity {
 		super.onDestroy();
 		wordDAO.close();
 		templateDAO.close();
+		favoritesDAO.close();
 	}
 	
 	@Override
@@ -80,5 +84,6 @@ public class GenericActivity extends Activity {
 		super.onResume();
 		wordDAO.open();
 		templateDAO.open();
+		favoritesDAO.open();
 	}
 }

@@ -67,7 +67,7 @@ public class RandomInsults extends GenericActivity {
 				Toast.makeText(RandomInsults.this, 
 						"Saved to favorites.", 
 						Toast.LENGTH_LONG).show();
-
+				
 			}
 
 		});

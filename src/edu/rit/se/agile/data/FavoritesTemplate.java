@@ -8,7 +8,6 @@ public class FavoritesTemplate extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "favorites";
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_TEMPLATE = "template";
-	public static final String COLUMN_CATEGORY = "category";
 
 	private static final String DATABASE_NAME = "favorites.db";
 	private static final int DATABASE_VERSION = 1;
@@ -17,7 +16,6 @@ public class FavoritesTemplate extends SQLiteOpenHelper {
 	private static final String DATABASE_CREATE = "create table "
 			+ TABLE_NAME + "(" + COLUMN_ID
 			+ " integer primary key autoincrement, " 
-			+ COLUMN_CATEGORY + " text not null, " 
 			+ COLUMN_TEMPLATE + " text not null);";
 
 	private Context ctx;
