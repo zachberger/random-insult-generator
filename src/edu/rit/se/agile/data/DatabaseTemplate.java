@@ -67,7 +67,6 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 			
 			String content;
 			while((content = bReader.readLine()) != null) {
-				Log.println(Log.VERBOSE, "Testing", "" + content);
 				String[] splitStr = content.split(SEPERATOR) ;
 				RandomInsults.templateDAO.createTemplate(splitStr[2], splitStr[1]);
 				
