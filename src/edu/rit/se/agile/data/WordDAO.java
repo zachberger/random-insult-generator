@@ -54,7 +54,6 @@ public class WordDAO {
 
 	public void deleteWord(Word word) {
 		long id = word.getId();
-		System.out.println("Comment deleted with id: " + id);
 		database.delete(WordsTemplate.TABLE_NAME, WordsTemplate.COLUMN_ID
 				+ " = " + id, null);
 	}
