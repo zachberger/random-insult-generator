@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
