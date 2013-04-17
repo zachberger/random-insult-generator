@@ -2,13 +2,14 @@ package edu.rit.se.agile.randominsultapp;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,8 +20,10 @@ import edu.rit.se.agile.data.WordsTemplate;
 public class RandomInsults extends GenericActivity {
 	private Button generateButton;
 	private Button favoriteButton;
+	private ImageButton generateTtsButton;
 	private TextView insultTextField;
 	private Spinner categorySpinner;
+	private TextToSpeech tts;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,14 @@ public class RandomInsults extends GenericActivity {
 		generateButton = (Button) findViewById(R.id.button_generate);
 		favoriteButton = (Button) findViewById(R.id.button_save_favorite);
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
+		generateTtsButton = (ImageButton) findViewById(R.id.generateTtsButton);
+		
+		tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+			@Override
+			public void onInit(int status) {
+				
+			}
+		});
 
 		Cursor categoryCursor = wordDAO.getCategories();
 		
@@ -41,6 +52,15 @@ public class RandomInsults extends GenericActivity {
 						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
 						new int[]{ R.id.category_list_entry }, 
 						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
+		
+		generateTtsButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				tts.speak(insultTextField.getText().toString(), 
+						TextToSpeech.QUEUE_FLUSH, 
+						null);
+			}
+		});
 
 		generateButton.setOnClickListener( new OnClickListener() {
 
