@@ -18,12 +18,10 @@ public class FavoritesTemplate extends SQLiteOpenHelper {
 			+ " integer primary key autoincrement, " 
 			+ FAVORITES_COLUMN + " text not null);";
 
-	private Context ctx;
 
 	public FavoritesTemplate(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		// TODO Auto-generated constructor stub
-		this.ctx = context;
 	}
 
 	@Override

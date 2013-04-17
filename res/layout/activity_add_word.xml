@@ -8,15 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddWord" >
 
-    <Button
-        android:id="@+id/add_word_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_word_spinner"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="Add Word" />
-
     <EditText
         android:id="@+id/add_word_text"
         android:layout_width="wrap_content"
@@ -36,5 +27,31 @@
         android:layout_alignTop="@+id/add_word_text"
         android:layout_toRightOf="@+id/add_word_text"
         android:entries="@array/add_word_spinner_array" />
+
+    <Button
+        android:id="@+id/add_word_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_word_category_spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="67dp"
+        android:text="Add Word" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/add_word_text"
+        android:layout_alignTop="@+id/add_word_category_spinner"
+        android:text="@string/insult_category_label"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/add_word_category_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/add_word_button"
+        android:layout_below="@+id/add_word_spinner"
+        android:layout_marginTop="42dp" />
 
 </RelativeLayout>

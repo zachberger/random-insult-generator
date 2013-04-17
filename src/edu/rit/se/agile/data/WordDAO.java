@@ -44,7 +44,7 @@ public class WordDAO {
 		long insertId = database.insert(WordsTemplate.TABLE_NAME, null,
 				values);
 		Cursor cursor = database.query(WordsTemplate.TABLE_NAME,
-				allColumns, null, null,
+				allColumns, WordsTemplate.COLUMN_ID + "=?", new String[]{ String.valueOf(insertId) },
 				null, null, null);
 		cursor.moveToFirst();
 		Word newWord = cursorToWord(cursor);

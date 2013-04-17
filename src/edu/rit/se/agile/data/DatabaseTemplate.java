@@ -6,13 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import edu.rit.se.agile.randominsultapp.GenericActivity;
-
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+import edu.rit.se.agile.randominsultapp.GenericActivity;
 
 public class DatabaseTemplate extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "template";
