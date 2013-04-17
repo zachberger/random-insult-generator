@@ -18,24 +18,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/insult_category_label" />
 
-    <Button
-        android:id="@+id/button_generate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="88dp"
-        android:text="@string/button_generate" />
-
-    <Button
-        android:id="@+id/button_save_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
-        android:text="@string/button_save_favorite" />
-
     <Spinner
         android:id="@+id/category_spinner"
         android:layout_width="wrap_content"
@@ -52,12 +34,29 @@
         android:text="@string/default_insult"
         android:textSize="36sp" />
 
+    <Button
+        android:id="@+id/button_save_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/button_save_favorite" />
+
+    <Button
+        android:id="@+id/button_generate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/generateTtsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:text="@string/button_generate" />
+
     <ImageButton
         android:id="@+id/generateTtsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_generate"
-        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@+id/insult_display"
+        android:layout_alignTop="@+id/button_save_favorite"
         android:src="@drawable/speaker" />
 
 </RelativeLayout>
