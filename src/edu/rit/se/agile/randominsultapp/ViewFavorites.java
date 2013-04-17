@@ -1,5 +1,6 @@
 package edu.rit.se.agile.randominsultapp;
 
+import edu.rit.se.agile.data.FavoritesTemplate;
 import edu.rit.se.agile.data.WordsTemplate;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -15,9 +16,9 @@ public class ViewFavorites extends GenericActivity {
 		ListView list =  (ListView) findViewById(R.id.favorites_list);
 		list.setAdapter(
 				new SimpleCursorAdapter(this, 
-						R.id.favorites_list, 
+						R.layout.activity_view_favorites, 
 						favoritesDAO.getAllFavoritesCursor(), //FIX THIS 
-						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
+						new String[]{ FavoritesTemplate.FAVORITES_COLUMN }, 
 						new int[]{ R.id.category_list_entry }, 
 						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
 		}
