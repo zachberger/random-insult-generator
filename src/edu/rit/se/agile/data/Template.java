@@ -33,13 +33,13 @@ public class Template {
 		this.category = category;
 	}
 
-	public String fillTemplate(WordDAO wordDAO) {
+	public String fillTemplate(WordDAO wordDAO, String category) {
 		String insult = template;
 
-		List<Word> adjWords = wordDAO.getAllWords(WordType.ADJECTIVE.val());
-		List<Word> advWords = wordDAO.getAllWords(WordType.ADVERB.val());
-		List<Word> nounWords = wordDAO.getAllWords(WordType.NOUN.val());
-		List<Word> verbWords = wordDAO.getAllWords(WordType.VERB.val());
+		List<Word> adjWords = wordDAO.getAllWords(WordType.ADJECTIVE.val(),category);
+		List<Word> advWords = wordDAO.getAllWords(WordType.ADVERB.val(),category);
+		List<Word> nounWords = wordDAO.getAllWords(WordType.NOUN.val(),category);
+		List<Word> verbWords = wordDAO.getAllWords(WordType.VERB.val(),category);
 
 		Collections.shuffle(adjWords);
 		Collections.shuffle(advWords);

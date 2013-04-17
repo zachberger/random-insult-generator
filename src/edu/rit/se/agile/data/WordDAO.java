@@ -17,11 +17,11 @@ public class WordDAO {
 			WordsTemplate.COLUMN_CATEGORY,
 			WordsTemplate.COLUMN_WORD};
 	private String[] category = {WordsTemplate.COLUMN_ID, WordsTemplate.COLUMN_CATEGORY};
-	
+
 	public WordDAO(Context context) {
 		dbHelper = new WordsTemplate(context);
 	}
-	
+
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
@@ -29,13 +29,13 @@ public class WordDAO {
 	public void close() {
 		database.close();
 	}
-	
+
 	public void populateDatabase() {
 		if(!dbHelper.getDatabaseInitialized()) {
 			dbHelper.initializeDatabase();
 		}
 	}
-	
+
 	public Word createWord(String type, String value, String category) {
 		ContentValues values = new ContentValues();
 		values.put(WordsTemplate.COLUMN_WORD, value);
@@ -54,7 +54,6 @@ public class WordDAO {
 
 	public void deleteWord(Word word) {
 		long id = word.getId();
-		System.out.println("Comment deleted with id: " + id);
 		database.delete(WordsTemplate.TABLE_NAME, WordsTemplate.COLUMN_ID
 				+ " = " + id, null);
 	}
@@ -84,16 +83,28 @@ public class WordDAO {
 		cursor.close();
 		return comments;
 	}
-	
-	public List<Word> getAllWords(String wordType) {
+
+	public List<Word> getAllWords(String wordType, String category) {
 		List<Word> words = new ArrayList<Word>();
-		String[] whereArgs = new String[] {
-			    wordType
+		Cursor cursor = null;
+		if(category != null) {
+			String[] whereArgs = new String[] {
+					wordType,
+					category
 			};
 
-		Cursor cursor = database.query(WordsTemplate.TABLE_NAME,
-				allColumns, WordsTemplate.COLUMN_WORD_TYPE + " = ? ", whereArgs, null, null, null);
+			cursor = database.query(WordsTemplate.TABLE_NAME,
+					allColumns, WordsTemplate.COLUMN_WORD_TYPE + " = ? and " + WordsTemplate.COLUMN_CATEGORY + "=?" , whereArgs, null, null, null);
 
+
+		} else {
+			String[] whereArgs = new String[] {
+					wordType
+			};
+
+			cursor = database.query(WordsTemplate.TABLE_NAME,
+					allColumns, WordsTemplate.COLUMN_WORD_TYPE + " = ? ", whereArgs, null, null, null);
+		}
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			Word comment = cursorToWord(cursor);
@@ -104,7 +115,7 @@ public class WordDAO {
 		cursor.close();
 		return words;
 	}
-	
+
 	public Cursor getCategories() {
 		return database.rawQuery("Select DISTINCT " + WordsTemplate.COLUMN_CATEGORY + " as _id, " + 
 				WordsTemplate.COLUMN_CATEGORY + " from " + WordsTemplate.TABLE_NAME, null);

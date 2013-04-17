@@ -44,7 +44,6 @@ public class FavoritesDAO {
 
 	public void deleteTemplate(Template template) {
 		long id = template.getId();
-		System.out.println("Comment deleted with id: " + id);
 		database.delete(FavoritesTemplate.TABLE_NAME, FavoritesTemplate.COLUMN_ID
 				+ " = " + id, null);
 	}

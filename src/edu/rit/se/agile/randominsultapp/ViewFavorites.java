@@ -1,4 +1,5 @@
 package edu.rit.se.agile.randominsultapp;
+
 import edu.rit.se.agile.data.FavoritesTemplate;
 import android.os.Bundle;
 import android.util.Log;
