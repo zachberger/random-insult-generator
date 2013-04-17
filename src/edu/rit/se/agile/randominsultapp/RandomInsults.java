@@ -21,7 +21,6 @@ public class RandomInsults extends GenericActivity {
 	private Button favoriteButton;
 	private TextView insultTextField;
 	private Spinner categorySpinner;
-	private Random rand = new Random();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,6 @@ public class RandomInsults extends GenericActivity {
 
 				Collections.shuffle(temp);
 				if(temp.size() > 0 ) {
-//					insultTextField.setText(temp.get(randomTemplate).getTemplate());
 					String text = temp.get(0).fillTemplate(wordDAO).trim();
 					text = Character.toUpperCase(text.charAt(0)) + text.substring(1);
 					insultTextField.setText(text);
