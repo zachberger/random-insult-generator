@@ -51,7 +51,7 @@ public class RandomInsults extends GenericActivity {
 
 				Collections.shuffle(temp);
 				if(temp.size() > 0 ) {
-					String text = temp.get(0).fillTemplate(wordDAO).trim();
+					String text = temp.get(0).fillTemplate(wordDAO,null).trim();
 					text = Character.toUpperCase(text.charAt(0)) + text.substring(1);
 					insultTextField.setText(text);
 				} else {
