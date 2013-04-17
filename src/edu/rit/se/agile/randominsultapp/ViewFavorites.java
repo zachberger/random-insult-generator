@@ -1,11 +1,8 @@
 package edu.rit.se.agile.randominsultapp;
 import edu.rit.se.agile.data.FavoritesTemplate;
-import edu.rit.se.agile.data.WordsTemplate;
->>>>>>> b2f0820fc898e022260bcc87c4751058f44388d6
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import edu.rit.se.agile.data.FavoritesTemplate;
 
 public class ViewFavorites extends GenericActivity {
 
