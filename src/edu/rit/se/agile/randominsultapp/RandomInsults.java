@@ -5,17 +5,25 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class RandomInsults extends GenericActivity {
 
+	Menu menu;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-	    actionBar.setDisplayShowTitleEnabled(false);
+//	    actionBar.setDisplayShowHomeEnabled(false);
+//	    actionBar.setDisplayShowTitleEnabled(false);
 
 	    Tab tab = actionBar.newTab()
 	            .setText("Generate Insults")
@@ -38,8 +46,31 @@ public class RandomInsults extends GenericActivity {
 
 	}
 	
-	public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
-	    private Fragment mFragment;
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.random_insults, menu);
+	    this.menu = menu;
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+		Intent action = new Intent("action-bar-pressed");
+	    switch (item.getItemId()) {
+	        case R.id.menu_save_favorites:
+	        	action.putExtra("save-favorite", true);
+	        case R.id.menu_speak:
+	        	action.putExtra("speak-insult", true);
+	    }
+    	LocalBroadcastManager.getInstance(this).sendBroadcast( action );
+    	return true;
+	}
+	
+	public class TabListener<T extends Fragment> implements ActionBar.TabListener {
+	    
+		private Fragment mFragment;
 	    private final Activity mActivity;
 	    private final String mTag;
 	    private final Class<T> mClass;
@@ -66,6 +97,13 @@ public class RandomInsults extends GenericActivity {
 	        } else {
 	            // If it exists, simply attach it in order to show it
 	            ft.attach(mFragment);
+	        }
+	        if( menu != null ){
+		        if( !mTag.equals("generate") ){
+		        	menu.clear();
+		        }else{
+		        	onCreateOptionsMenu(menu);
+		        }
 	        }
 	    }
 

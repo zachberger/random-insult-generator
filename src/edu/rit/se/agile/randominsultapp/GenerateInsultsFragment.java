@@ -6,15 +6,19 @@ import java.util.List;
 import edu.rit.se.agile.data.Template;
 import edu.rit.se.agile.data.WordsTemplate;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,20 +27,16 @@ import android.widget.Toast;
 public class GenerateInsultsFragment extends Fragment {
 	
 	private Button generateButton;
-	private Button favoriteButton;
-	private ImageButton generateTtsButton;
 	private TextView insultTextField;
 	private Spinner categorySpinner;
-		
+	private BroadcastReceiver receiver;
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View generatorView = inflater.inflate(R.layout.activity_random_insults, container, false);
-		
 		insultTextField = (TextView) generatorView.findViewById( R.id.insult_display );
 		generateButton = (Button) generatorView.findViewById(R.id.button_generate);
-		favoriteButton = (Button) generatorView.findViewById(R.id.button_save_favorite);
 		categorySpinner = (Spinner) generatorView.findViewById(R.id.category_spinner);
-		generateTtsButton = (ImageButton) generatorView.findViewById(R.id.generateTtsButton);
 		
 		Cursor categoryCursor = GenericActivity.wordDAO.getCategories();
 		categorySpinner.setAdapter(
@@ -46,16 +46,6 @@ public class GenerateInsultsFragment extends Fragment {
 						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
 						new int[]{ R.id.category_list_entry }, 
 						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
-		
-		generateTtsButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				GenericActivity.tts.speak(insultTextField.getText().toString(), 
-						TextToSpeech.QUEUE_FLUSH, 
-						null);
-			}
-		});
-
 		generateButton.setOnClickListener( new OnClickListener() {
 
 			@Override
@@ -75,19 +65,39 @@ public class GenerateInsultsFragment extends Fragment {
 
 		});
 
-		favoriteButton.setOnClickListener( new OnClickListener() {
+		return generatorView;
+	}
+	
+
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+		
+	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		receiver = new BroadcastReceiver(){
 
 			@Override
-			public void onClick(View v) {
-				GenericActivity.favoritesDAO.createFavorite(insultTextField.getText().toString());
-				Toast.makeText(getActivity(), 
-						"Saved to favorites.", 
-						Toast.LENGTH_LONG).show();
+			public void onReceive(Context context, Intent intent) {
+				if( intent.getExtras().getBoolean("save-favorite") ){
+					GenericActivity.favoritesDAO.createFavorite(insultTextField.getText().toString());
+					Toast.makeText(getActivity(), 
+							"Saved to favorites.", 
+							Toast.LENGTH_LONG).show();
+				}else if( intent.getExtras().getBoolean("speak-insult") ){
+					GenericActivity.tts.speak(insultTextField.getText().toString(), 
+					TextToSpeech.QUEUE_FLUSH, 
+					null);
+				}
 			}
-
-		});
+			
+		};
 		
-		return generatorView;
+		LocalBroadcastManager.getInstance(getActivity()).registerReceiver( receiver, new IntentFilter("action-bar-pressed") );
 	}
 
 }

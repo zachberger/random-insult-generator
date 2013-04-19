@@ -16,20 +16,13 @@
         <activity
             android:name="edu.rit.se.agile.randominsultapp.RandomInsults"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="edu.rit.se.agile.randominsultapp.AddWord"
-            android:label="@string/title_activity_add_word" >           
-        </activity>
-        <activity
-            android:name="edu.rit.se.agile.randominsultapp.ViewFavorites"
-            android:label="@string/title_activity_view_favorites" >
         </activity>
     </application>
 </manifest>
