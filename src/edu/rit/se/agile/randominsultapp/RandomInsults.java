@@ -1,88 +1,84 @@
 package edu.rit.se.agile.randominsultapp;
 
-import java.util.Collections;
-import java.util.List;
-
-import android.database.Cursor;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-import edu.rit.se.agile.data.Template;
-import edu.rit.se.agile.data.WordsTemplate;
 
 public class RandomInsults extends GenericActivity {
-	private Button generateButton;
-	private Button favoriteButton;
-	private ImageButton generateTtsButton;
-	private TextView insultTextField;
-	private Spinner categorySpinner;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_random_insults);
 
-		insultTextField = (TextView) findViewById( R.id.insult_display );
-		generateButton = (Button) findViewById(R.id.button_generate);
-		favoriteButton = (Button) findViewById(R.id.button_save_favorite);
-		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
-		generateTtsButton = (ImageButton) findViewById(R.id.generateTtsButton);
-		
-		Cursor categoryCursor = wordDAO.getCategories();
-		
-		categorySpinner.setAdapter(
-				new SimpleCursorAdapter(this, 
-						R.layout.category_list, 
-						categoryCursor, 
-						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
-						new int[]{ R.id.category_list_entry }, 
-						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
-		
-		generateTtsButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				tts.speak(insultTextField.getText().toString(), 
-						TextToSpeech.QUEUE_FLUSH, 
-						null);
-			}
-		});
+		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	    actionBar.setDisplayShowTitleEnabled(false);
 
-		generateButton.setOnClickListener( new OnClickListener() {
+	    Tab tab = actionBar.newTab()
+	            .setText("Generate Insults")
+	            .setTabListener(new TabListener<GenerateInsultsFragment>(
+	                    this, "generate", GenerateInsultsFragment.class));
+	    actionBar.addTab(tab);
+	    
+	    tab = actionBar.newTab()
+	            .setText("Favorites")
+	            .setTabListener(new TabListener<ViewFavorites>(
+	                    this, "favorites", ViewFavorites.class));
+	    actionBar.addTab(tab);
+	    
+	    tab = actionBar.newTab()
+	            .setText("Customize")
+	            .setTabListener(new TabListener<AddWord>(
+	                    this, "customize", AddWord.class));
+	    
+	    actionBar.addTab(tab);
 
-			@Override
-			public void onClick(View v) {
-				String category = ((Cursor) categorySpinner.getSelectedItem()).getString(0); //My spinnah thing
-				List<Template> temp = templateDAO.getAllTemplates(category); 
-
-				Collections.shuffle(temp);
-				if(temp.size() > 0 ) {
-					String text = temp.get(0).fillTemplate(wordDAO,category).trim();
-					text = Character.toUpperCase(text.charAt(0)) + text.substring(1);
-					insultTextField.setText(text);
-				} else {
-					insultTextField.setText("There was an error! :(");
-				}
-			}
-
-		});
-
-		favoriteButton.setOnClickListener( new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				favoritesDAO.createFavorite(insultTextField.getText().toString());
-				Toast.makeText(RandomInsults.this, 
-						"Saved to favorites.", 
-						Toast.LENGTH_LONG).show();
-				
-			}
-
-		});
 	}
+	
+	public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
+	    private Fragment mFragment;
+	    private final Activity mActivity;
+	    private final String mTag;
+	    private final Class<T> mClass;
+
+	    /** Constructor used each time a new tab is created.
+	      * @param activity  The host Activity, used to instantiate the fragment
+	      * @param tag  The identifier tag for the fragment
+	      * @param clz  The fragment's Class, used to instantiate the fragment
+	      */
+	    public TabListener(Activity activity, String tag, Class<T> clz) {
+	        mActivity = activity;
+	        mTag = tag;
+	        mClass = clz;
+	    }
+
+	    /* The following are each of the ActionBar.TabListener callbacks */
+
+	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+	        // Check if the fragment is already initialized
+	        if (mFragment == null) {
+	            // If not, instantiate and add it to the activity
+	            mFragment = Fragment.instantiate(mActivity, mClass.getName());
+	            ft.add(android.R.id.content, mFragment, mTag);
+	        } else {
+	            // If it exists, simply attach it in order to show it
+	            ft.attach(mFragment);
+	        }
+	    }
+
+	    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	        if (mFragment != null) {
+	            // Detach the fragment, because another one is being attached
+	            ft.detach(mFragment);
+	        }
+	    }
+
+	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	        // User selected the already selected tab. Usually do nothing.
+	    }
+	}
+	
 }

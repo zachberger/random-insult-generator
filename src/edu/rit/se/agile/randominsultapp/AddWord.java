@@ -1,8 +1,11 @@
 package edu.rit.se.agile.randominsultapp;
 
+import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,26 +16,27 @@ import edu.rit.se.agile.data.Word;
 import edu.rit.se.agile.data.WordType;
 import edu.rit.se.agile.data.WordsTemplate;
 
-public class AddWord extends GenericActivity {
+public class AddWord extends Fragment {
+	
 	private Button addWordButton;
 	private EditText textField;
 	private Spinner spinner;
 	private Spinner categorySpinner;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_word);
+		View addView = inflater.inflate(R.layout.activity_add_word, container, false);
 		
-		addWordButton = (Button) findViewById(R.id.add_word_button);
-		textField = (EditText) findViewById(R.id.add_word_text);
-		spinner = (Spinner) findViewById(R.id.add_word_spinner);
-		categorySpinner = (Spinner) findViewById(R.id.add_word_category_spinner);
+		addWordButton = (Button) addView.findViewById(R.id.add_word_button);
+		textField = (EditText) addView.findViewById(R.id.add_word_text);
+		spinner = (Spinner) addView.findViewById(R.id.add_word_spinner);
+		categorySpinner = (Spinner) addView.findViewById(R.id.add_word_category_spinner);
 
-		Cursor categoryCursor = wordDAO.getCategories();
+		Cursor categoryCursor = GenericActivity.wordDAO.getCategories();
 		
 		categorySpinner.setAdapter(
-				new SimpleCursorAdapter(this, 
+				new SimpleCursorAdapter(getActivity(), 
 						R.layout.category_list, 
 						categoryCursor, 
 						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
@@ -57,7 +61,7 @@ public class AddWord extends GenericActivity {
 					wordType = WordType.ADVERB.val();
 				}
 				
-				Word newWord = wordDAO.createWord(wordType, text, categoryText);
+				Word newWord = GenericActivity.wordDAO.createWord(wordType, text, categoryText);
 				Toast.makeText(v.getContext(), 
 						newWord.getWord() + " was added.",
 						Toast.LENGTH_SHORT).show();
@@ -65,5 +69,6 @@ public class AddWord extends GenericActivity {
 				textField.setText("");
 			}
 		});
+		return addView;
 	}
 }
