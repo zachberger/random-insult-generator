@@ -23,8 +23,6 @@ public class RandomInsults extends GenericActivity {
 	private ImageButton generateTtsButton;
 	private TextView insultTextField;
 	private Spinner categorySpinner;
-	private TextToSpeech tts;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,13 +34,6 @@ public class RandomInsults extends GenericActivity {
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
 		generateTtsButton = (ImageButton) findViewById(R.id.generateTtsButton);
 		
-		tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-			@Override
-			public void onInit(int status) {
-				
-			}
-		});
-
 		Cursor categoryCursor = wordDAO.getCategories();
 		
 		categorySpinner.setAdapter(

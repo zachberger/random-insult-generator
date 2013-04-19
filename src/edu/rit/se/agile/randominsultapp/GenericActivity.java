@@ -4,6 +4,7 @@ package edu.rit.se.agile.randominsultapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import edu.rit.se.agile.data.FavoritesDAO;
@@ -15,6 +16,8 @@ public class GenericActivity extends Activity {
 
 	public static WordDAO wordDAO;
 	public static TemplateDAO templateDAO;
+
+	protected TextToSpeech tts;
 
 	public GenericActivity() {
 		super();
@@ -60,6 +63,13 @@ public class GenericActivity extends Activity {
 		
 		wordDAO.populateDatabase();
 		templateDAO.populateDatabase();
+		
+		tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+			@Override
+			public void onInit(int status) {
+				
+			}
+		});
 		
 	}
 	
