@@ -16,7 +16,7 @@ import edu.rit.se.agile.data.Word;
 import edu.rit.se.agile.data.WordType;
 import edu.rit.se.agile.data.WordsTemplate;
 
-public class AddWord extends Fragment {
+public class CustomizeFragment extends Fragment {
 	
 	private Button addWordButton;
 	private EditText textField;

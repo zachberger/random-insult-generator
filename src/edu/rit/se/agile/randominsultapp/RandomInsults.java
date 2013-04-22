@@ -33,14 +33,14 @@ public class RandomInsults extends GenericActivity {
 	    
 	    tab = actionBar.newTab()
 	            .setText("Favorites")
-	            .setTabListener(new TabListener<ViewFavorites>(
-	                    this, "favorites", ViewFavorites.class));
+	            .setTabListener(new TabListener<ViewFavoritesFragment>(
+	                    this, "favorites", ViewFavoritesFragment.class));
 	    actionBar.addTab(tab);
 	    
 	    tab = actionBar.newTab()
 	            .setText("Customize")
-	            .setTabListener(new TabListener<AddWord>(
-	                    this, "customize", AddWord.class));
+	            .setTabListener(new TabListener<CustomizeFragment>(
+	                    this, "customize", CustomizeFragment.class));
 	    
 	    actionBar.addTab(tab);
 
