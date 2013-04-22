@@ -1,5 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/menu_generate_insults" android:title="Generate Insults"></item><item android:id="@+id/menu_view_favorites" android:title="View Favorites"></item><item android:id="@+id/menu_add_word" android:orderInCategory="100" android:title="@string/action_add_word" android:showAsAction="never"></item>
-    
-    
+    <item 
+        android:id="@+id/menu_save_favorites" 
+        android:title="Save To Favorites"
+        android:icon="@drawable/favorite"
+        android:showAsAction="always">
+    </item>
+    <item 
+        android:id="@+id/menu_speak" 
+        android:title="Speak Insult"
+        android:icon="@drawable/speak"
+        android:showAsAction="always">
+    </item>
 </menu>

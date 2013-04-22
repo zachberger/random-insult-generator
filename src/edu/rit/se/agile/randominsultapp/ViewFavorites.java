@@ -1,9 +1,11 @@
 package edu.rit.se.agile.randominsultapp;
 
 import edu.rit.se.agile.data.FavoritesTemplate;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -14,15 +16,15 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-public class ViewFavorites extends GenericActivity {
+public class ViewFavorites extends Fragment {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_view_favorites);
+		View favoritesView = inflater.inflate(R.layout.activity_view_favorites, container, false);
 		
-		ListView list =  (ListView) findViewById(R.id.favorites_list);
-		Log.d("ViewFavorites", favoritesDAO.getAllFavoritesCursor().getCount()+"");
+		ListView list =  (ListView) favoritesView.findViewById(R.id.favorites_list);
+		Log.d("ViewFavorites", GenericActivity.favoritesDAO.getAllFavoritesCursor().getCount()+"");
 		
 		list.setAdapter( new FavoritesListAdapter() );
 		list.setClickable(true);
@@ -34,14 +36,15 @@ public class ViewFavorites extends GenericActivity {
 			}
 			
 		});
+		return favoritesView;
 	}
 		
 	private class FavoritesListAdapter extends SimpleCursorAdapter{
 		
 		public FavoritesListAdapter(){
-			super( ViewFavorites.this, 
+			super( getActivity(), 
 					R.layout.favorites_list_entry, 
-					favoritesDAO.getAllFavoritesCursor(), //FIX THIS 
+					GenericActivity.favoritesDAO.getAllFavoritesCursor(), //FIX THIS 
 					new String[]{ FavoritesTemplate.FAVORITES_COLUMN }, 
 					new int[]{ R.id.favorites_list_entry }, 
 					SimpleCursorAdapter.FLAG_AUTO_REQUERY );
@@ -55,7 +58,7 @@ public class ViewFavorites extends GenericActivity {
 
 				@Override
 				public void onClick(View triggerView) {
-					tts.speak(savedInsult.getText().toString(), 
+					GenericActivity.tts.speak(savedInsult.getText().toString(), 
 							TextToSpeech.QUEUE_FLUSH, 
 							null);
 				}
