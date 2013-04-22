@@ -16,7 +16,8 @@
         <activity
             android:name="edu.rit.se.agile.randominsultapp.RandomInsults"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,11 +26,13 @@
         </activity>
         <activity
             android:name="edu.rit.se.agile.randominsultapp.AddWord"
-            android:label="@string/title_activity_add_word" >           
+            android:label="@string/title_activity_add_word"
+            android:screenOrientation="portrait" >           
         </activity>
         <activity
             android:name="edu.rit.se.agile.randominsultapp.ViewFavorites"
-            android:label="@string/title_activity_view_favorites" >
+            android:label="@string/title_activity_view_favorites"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 </manifest>
