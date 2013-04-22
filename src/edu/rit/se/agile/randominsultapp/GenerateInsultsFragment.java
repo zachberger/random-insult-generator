@@ -41,10 +41,10 @@ public class GenerateInsultsFragment extends Fragment {
 		Cursor categoryCursor = RandomInsults.wordDAO.getCategories();
 		categorySpinner.setAdapter(
 				new SimpleCursorAdapter(getActivity(), 
-						R.layout.category_list, 
+						android.R.layout.simple_spinner_dropdown_item, 
 						categoryCursor, 
 						new String[]{ WordsTemplate.COLUMN_CATEGORY }, 
-						new int[]{ R.id.category_list_entry }, 
+						new int[]{ android.R.id.text1 }, 
 						SimpleCursorAdapter.FLAG_AUTO_REQUERY ));
 		generateButton.setOnClickListener( new OnClickListener() {
 
