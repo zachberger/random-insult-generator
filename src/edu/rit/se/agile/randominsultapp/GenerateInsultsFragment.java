@@ -38,7 +38,7 @@ public class GenerateInsultsFragment extends Fragment {
 		generateButton = (Button) generatorView.findViewById(R.id.button_generate);
 		categorySpinner = (Spinner) generatorView.findViewById(R.id.category_spinner);
 		
-		Cursor categoryCursor = GenericActivity.wordDAO.getCategories();
+		Cursor categoryCursor = RandomInsults.wordDAO.getCategories();
 		categorySpinner.setAdapter(
 				new SimpleCursorAdapter(getActivity(), 
 						R.layout.category_list, 
@@ -51,11 +51,11 @@ public class GenerateInsultsFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String category = ((Cursor) categorySpinner.getSelectedItem()).getString(0); //My spinnah thing
-				List<Template> temp = GenericActivity.templateDAO.getAllTemplates(category); 
+				List<Template> temp = RandomInsults.templateDAO.getAllTemplates(category); 
 
 				Collections.shuffle(temp);
 				if(temp.size() > 0 ) {
-					String text = temp.get(0).fillTemplate(GenericActivity.wordDAO,category).trim();
+					String text = temp.get(0).fillTemplate(RandomInsults.wordDAO,category).trim();
 					text = Character.toUpperCase(text.charAt(0)) + text.substring(1);
 					insultTextField.setText(text);
 				} else {
@@ -84,12 +84,12 @@ public class GenerateInsultsFragment extends Fragment {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				if( intent.getExtras().getBoolean("save-favorite") ){
-					GenericActivity.favoritesDAO.createFavorite(insultTextField.getText().toString());
+					RandomInsults.favoritesDAO.createFavorite(insultTextField.getText().toString());
 					Toast.makeText(getActivity(), 
 							"Saved to favorites.", 
 							Toast.LENGTH_LONG).show();
 				}else if( intent.getExtras().getBoolean("speak-insult") ){
-					GenericActivity.tts.speak(insultTextField.getText().toString(), 
+					RandomInsults.tts.speak(insultTextField.getText().toString(), 
 					TextToSpeech.QUEUE_FLUSH, 
 					null);
 				}

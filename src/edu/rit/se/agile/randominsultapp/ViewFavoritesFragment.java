@@ -24,7 +24,7 @@ public class ViewFavoritesFragment extends Fragment {
 		View favoritesView = inflater.inflate(R.layout.activity_view_favorites, container, false);
 		
 		ListView list =  (ListView) favoritesView.findViewById(R.id.favorites_list);
-		Log.d("ViewFavorites", GenericActivity.favoritesDAO.getAllFavoritesCursor().getCount()+"");
+		Log.d("ViewFavorites", RandomInsults.favoritesDAO.getAllFavoritesCursor().getCount()+"");
 		
 		list.setAdapter( new FavoritesListAdapter() );
 		list.setClickable(true);
@@ -44,7 +44,7 @@ public class ViewFavoritesFragment extends Fragment {
 		public FavoritesListAdapter(){
 			super( getActivity(), 
 					R.layout.favorites_list_entry, 
-					GenericActivity.favoritesDAO.getAllFavoritesCursor(), //FIX THIS 
+					RandomInsults.favoritesDAO.getAllFavoritesCursor(), //FIX THIS 
 					new String[]{ FavoritesTemplate.FAVORITES_COLUMN }, 
 					new int[]{ R.id.favorites_list_entry }, 
 					SimpleCursorAdapter.FLAG_AUTO_REQUERY );
@@ -58,7 +58,7 @@ public class ViewFavoritesFragment extends Fragment {
 
 				@Override
 				public void onClick(View triggerView) {
-					GenericActivity.tts.speak(savedInsult.getText().toString(), 
+					RandomInsults.tts.speak(savedInsult.getText().toString(), 
 							TextToSpeech.QUEUE_FLUSH, 
 							null);
 				}

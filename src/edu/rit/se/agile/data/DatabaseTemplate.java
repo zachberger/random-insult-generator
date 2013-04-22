@@ -6,11 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import edu.rit.se.agile.randominsultapp.RandomInsults;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import edu.rit.se.agile.randominsultapp.GenericActivity;
 
 public class DatabaseTemplate extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "template";
@@ -66,7 +67,7 @@ public class DatabaseTemplate extends SQLiteOpenHelper {
 			String content;
 			while((content = bReader.readLine()) != null) {
 				String[] splitStr = content.split(SEPERATOR) ;
-				GenericActivity.templateDAO.createTemplate(splitStr[2], splitStr[1]);
+				RandomInsults.templateDAO.createTemplate(splitStr[2], splitStr[1]);
 				
 			}
 		} catch (FileNotFoundException e) {

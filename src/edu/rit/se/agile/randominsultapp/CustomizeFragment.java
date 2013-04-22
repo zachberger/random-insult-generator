@@ -33,7 +33,7 @@ public class CustomizeFragment extends Fragment {
 		spinner = (Spinner) addView.findViewById(R.id.add_word_spinner);
 		categorySpinner = (Spinner) addView.findViewById(R.id.add_word_category_spinner);
 
-		Cursor categoryCursor = GenericActivity.wordDAO.getCategories();
+		Cursor categoryCursor = RandomInsults.wordDAO.getCategories();
 		
 		categorySpinner.setAdapter(
 				new SimpleCursorAdapter(getActivity(), 
@@ -61,7 +61,7 @@ public class CustomizeFragment extends Fragment {
 					wordType = WordType.ADVERB.val();
 				}
 				
-				Word newWord = GenericActivity.wordDAO.createWord(wordType, text, categoryText);
+				Word newWord = RandomInsults.wordDAO.createWord(wordType, text, categoryText);
 				Toast.makeText(v.getContext(), 
 						newWord.getWord() + " was added.",
 						Toast.LENGTH_SHORT).show();

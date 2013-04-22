@@ -1,5 +1,8 @@
 package edu.rit.se.agile.randominsultapp;
 
+import edu.rit.se.agile.data.FavoritesDAO;
+import edu.rit.se.agile.data.TemplateDAO;
+import edu.rit.se.agile.data.WordDAO;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -7,14 +10,19 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class RandomInsults extends GenericActivity {
+public class RandomInsults extends Activity {
 
 	Menu menu;
+	public static FavoritesDAO favoritesDAO;
+	public static WordDAO wordDAO;
+	public static TemplateDAO templateDAO;
+	public static TextToSpeech tts;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +30,25 @@ public class RandomInsults extends GenericActivity {
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//	    actionBar.setDisplayShowHomeEnabled(false);
-//	    actionBar.setDisplayShowTitleEnabled(false);
+
+		wordDAO = new WordDAO(this);
+		templateDAO = new TemplateDAO(this);
+		favoritesDAO = new FavoritesDAO(this);
+		
+		wordDAO.open();
+		templateDAO.open();
+		favoritesDAO.open();
+		
+		wordDAO.populateDatabase();
+		templateDAO.populateDatabase();
+		
+		tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+			@Override
+			public void onInit(int status) {
+				
+			}
+		});
+		
 
 	    Tab tab = actionBar.newTab()
 	            .setText("Generate Insults")
@@ -67,7 +92,31 @@ public class RandomInsults extends GenericActivity {
     	LocalBroadcastManager.getInstance(this).sendBroadcast( action );
     	return true;
 	}
-	
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		wordDAO.close();
+		templateDAO.close();
+		favoritesDAO.close();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		wordDAO.close();
+		templateDAO.close();
+		favoritesDAO.close();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		wordDAO.open();
+		templateDAO.open();
+		favoritesDAO.open();
+	}
+
 	public class TabListener<T extends Fragment> implements ActionBar.TabListener {
 	    
 		private Fragment mFragment;
