@@ -33,7 +33,16 @@
         android:layout_below="@+id/category_spinner"
         android:text="@string/default_insult"
         android:textSize="36sp" />
-
+   
+    <Button
+        android:id="@+id/button_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button_generate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Facebook" />
+    
     <Button
         android:id="@+id/button_generate"
         android:layout_width="wrap_content"
@@ -42,5 +51,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="@string/button_generate" />
+    
 
 </RelativeLayout>

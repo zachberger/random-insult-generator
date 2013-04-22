@@ -24,9 +24,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.*;
+import com.facebook.model.*;
+
 public class GenerateInsultsFragment extends Fragment {
 	
 	private Button generateButton;
+	private Button facebookButton;
 	private TextView insultTextField;
 	private Spinner categorySpinner;
 	private BroadcastReceiver receiver;
@@ -37,6 +41,26 @@ public class GenerateInsultsFragment extends Fragment {
 		insultTextField = (TextView) generatorView.findViewById( R.id.insult_display );
 		generateButton = (Button) generatorView.findViewById(R.id.button_generate);
 		categorySpinner = (Spinner) generatorView.findViewById(R.id.category_spinner);
+		facebookButton = (Button) generatorView.findViewById(R.id.button_facebook);
+		
+		facebookButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+
+			  Session.openActiveSession(getActivity(), true, new Session.StatusCallback() {
+
+				    // callback when session changes state
+				    @Override
+				    public void call(Session session, SessionState state, Exception exception) {
+				    	if( session.isOpened() ){
+				    		Toast.makeText(getActivity(), "Successfully logged in.", Toast.LENGTH_LONG).show();
+				    	}
+				    }
+			  });
+			}
+			
+		});
 		
 		Cursor categoryCursor = RandomInsults.wordDAO.getCategories();
 		categorySpinner.setAdapter(
@@ -69,6 +93,12 @@ public class GenerateInsultsFragment extends Fragment {
 	}
 	
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  super.onActivityResult(requestCode, resultCode, data);
+	  Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
+	}
+	
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
