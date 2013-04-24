@@ -19,8 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -28,9 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.*;
-import com.facebook.model.*;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.WebDialog;
+import com.facebook.widget.WebDialog.OnCompleteListener;
 
 public class GenerateInsultsFragment extends Fragment {
 	
@@ -39,7 +37,6 @@ public class GenerateInsultsFragment extends Fragment {
 	private TextView insultTextField;
 	private Spinner categorySpinner;
 	private BroadcastReceiver receiver;
-	private WebDialog dialog;
 	private UiLifecycleHelper uiHelper;
 	private LoginButton loginButton;
 	
@@ -54,21 +51,10 @@ public class GenerateInsultsFragment extends Fragment {
 		loginButton.setFragment(this);
 		
 		facebookShareButton.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View v) {
-				Session s = Session.getActiveSession();
-				if( s != null && s.isOpened() ){
-					Bundle params = new Bundle();
-
-					params.putString("name", "I'm an assole");
-					params.putString("caption", "I generated an insult:");
-					params.putString("description", insultTextField.getText().toString());
-					showDialogWithoutNotificationBar("feed", params);
-
-				}
+				publishFeedDialog();
 			}
-			
 		});
 		
 		Cursor categoryCursor = RandomInsults.wordDAO.getCategories();
@@ -101,6 +87,54 @@ public class GenerateInsultsFragment extends Fragment {
 		return generatorView;
 	}
 	
+	private void publishFeedDialog() {
+	    Bundle params = new Bundle();
+	    params.putString("name", "I generated a random insult");
+	    params.putString("caption", "This is a test.");
+	    params.putString("description", insultTextField.getText().toString() );
+	    params.putString("link", "https://developers.facebook.com/android");
+	    params.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
+
+	    WebDialog feedDialog = (
+	        new WebDialog.FeedDialogBuilder(getActivity(),
+	            Session.getActiveSession(),
+	            params))
+	        .setOnCompleteListener(new OnCompleteListener() {
+
+	            @Override
+	            public void onComplete(Bundle values,
+	                FacebookException error) {
+	                if (error == null) {
+	                    // When the story is posted, echo the success
+	                    // and the post Id.
+	                    final String postId = values.getString("post_id");
+	                    if (postId != null) {
+	                        Toast.makeText(getActivity(),
+	                            "Posted story, id: "+postId,
+	                            Toast.LENGTH_SHORT).show();
+	                    } else {
+	                        // User clicked the Cancel button
+	                        Toast.makeText(getActivity().getApplicationContext(), 
+	                            "Publish cancelled", 
+	                            Toast.LENGTH_SHORT).show();
+	                    }
+	                } else if (error instanceof FacebookOperationCanceledException) {
+	                    // User clicked the "x" button
+	                    Toast.makeText(getActivity().getApplicationContext(), 
+	                        "Publish cancelled", 
+	                        Toast.LENGTH_SHORT).show();
+	                } else {
+	                    // Generic, ex: network error
+	                    Toast.makeText(getActivity().getApplicationContext(), 
+	                        "Error posting story", 
+	                        Toast.LENGTH_SHORT).show();
+	                }
+	            }
+
+	        })
+	        .build();
+	    feedDialog.show();
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -162,22 +196,7 @@ public class GenerateInsultsFragment extends Fragment {
 	    uiHelper = new UiLifecycleHelper(getActivity(), callback);
 	    uiHelper.onCreate(savedInstanceState);
 	}
-	
-	private void showDialogWithoutNotificationBar(String action, Bundle params){
-		dialog = new WebDialog.Builder(getActivity(), Session.getActiveSession(), action, params).
-			    setOnCompleteListener(new WebDialog.OnCompleteListener() {
-			    @Override
-			    public void onComplete(Bundle values, FacebookException error) {
 
-			    }
-			}).build();
-
-			Window dialog_window = dialog.getWindow();
-			dialog_window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-			    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-			dialog.show();
-	}
 	
 	@Override
 	public void onResume() {
