@@ -6,17 +6,18 @@ import edu.rit.se.agile.data.WordDAO;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class RandomInsults extends Activity {
+public class RandomInsults extends FragmentActivity {
 
 	Menu menu;
 	public static FavoritesDAO favoritesDAO;
@@ -137,7 +138,9 @@ public class RandomInsults extends Activity {
 
 	    /* The following are each of the ActionBar.TabListener callbacks */
 
-	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+	    public void onTabSelected(Tab tab, FragmentTransaction DONOTUSE) {
+	    	android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+	    	
 	        // Check if the fragment is already initialized
 	        if (mFragment == null) {
 	            // If not, instantiate and add it to the activity
@@ -154,13 +157,16 @@ public class RandomInsults extends Activity {
 		        	onCreateOptionsMenu(menu);
 		        }
 	        }
+	        ft.commit();
 	    }
 
-	    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	    public void onTabUnselected(Tab tab, FragmentTransaction DONOTUSE) {
+	    	android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 	        if (mFragment != null) {
 	            // Detach the fragment, because another one is being attached
 	            ft.detach(mFragment);
 	        }
+	        ft.commit();
 	    }
 
 	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
