@@ -3,8 +3,6 @@ package edu.rit.se.agile.randominsultapp;
 import java.util.Collections;
 import java.util.List;
 
-import edu.rit.se.agile.data.Template;
-import edu.rit.se.agile.data.WordsTemplate;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,18 +15,25 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.*;
+import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
+
+import edu.rit.se.agile.data.Template;
+import edu.rit.se.agile.data.WordsTemplate;
 
 public class GenerateInsultsFragment extends Fragment {
 	
